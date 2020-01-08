@@ -1,6 +1,9 @@
 package com.project.coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -10,7 +13,8 @@ public class Payments {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long paymentId;
     private String paymentName;
-    private Date paymentDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate paymentDate;
 
     public Payments() {
     }
@@ -31,11 +35,11 @@ public class Payments {
         this.paymentName = paymentName;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 }

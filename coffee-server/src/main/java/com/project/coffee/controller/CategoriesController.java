@@ -18,7 +18,7 @@ public class CategoriesController {
     private CategoriesService categoriesService;
 
 
-    @RequestMapping(value = "/categories/", method = RequestMethod.GET)
+    @GetMapping("/categories")
     public ResponseEntity<List<Categories>> listAllCategories() {
         List<Categories> categories =(List<Categories>) categoriesService.findAll();
         if (categories.isEmpty()) {
@@ -27,7 +27,7 @@ public class CategoriesController {
         return new ResponseEntity<List<Categories>>(categories, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/categories/{id}")
     public ResponseEntity<Categories> getCategories(@PathVariable("id") long id) {
         System.out.println("Fetching Categories with id " + id);
         Categories categories = categoriesService.findById(id);
@@ -38,16 +38,15 @@ public class CategoriesController {
         return new ResponseEntity<Categories>(categories, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/categories/", method = RequestMethod.POST)
+    @PostMapping("/categories")
     public ResponseEntity<Void> createCategories(@RequestBody Categories categories, UriComponentsBuilder ucBuilder) {
         categoriesService.save(categories);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/categories/{id}").buildAndExpand(categories.getCategoriesId()).toUri());
+        headers.setLocation(ucBuilder.path("/categories/{id}").buildAndExpand(categories.getCategoryId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-
-    @RequestMapping(value = "/categories/{id}", method = RequestMethod.PUT)
+    @PutMapping("/categories/{id}")
     public ResponseEntity<Categories> updateCustomer(@PathVariable("id") long id, @RequestBody Categories categories) {
         System.out.println("Updating Customer " + id);
 
@@ -58,16 +57,15 @@ public class CategoriesController {
             return new ResponseEntity<Categories>(HttpStatus.NOT_FOUND);
         }
 
-        currentCategories.setCategoriesName(categories.getCategoriesName());
-        currentCategories.setCategoriesStatus(categories.getCategoriesStatus());
-        currentCategories.setCategoriesId(categories.getCategoriesId());
+        currentCategories.setCategoryName(categories.getCategoryName());
+        currentCategories.setCategoryStatus(categories.getCategoryStatus());
+        currentCategories.setCategoryId(categories.getCategoryId());
 
         categoriesService.save(currentCategories);
         return new ResponseEntity<Categories>(currentCategories, HttpStatus.OK);
     }
 
-
-    @RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/categories/{id}")
     public ResponseEntity<Categories> deleteCategories(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting Categories with id " + id);
 

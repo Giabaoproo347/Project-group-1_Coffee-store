@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/product/", method = RequestMethod.GET)
+    @GetMapping("/products")
     public ResponseEntity<List<Product>> listAllCategories() {
         List<Product> products =(List<Product>) productService.findAll();
         if (products.isEmpty()) {
@@ -28,7 +28,7 @@ public class ProductController {
         return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/products/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable("id") long id) {
         Product product = productService.findById(id);
         if (product == null) {
@@ -37,16 +37,16 @@ public class ProductController {
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/product/", method = RequestMethod.POST)
+    @PostMapping("/products")
     public ResponseEntity<Void> createProduct(@RequestBody Product product, UriComponentsBuilder ucBuilder) {
         productService.save(product);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/product/{id}").buildAndExpand(product.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/products/{id}").buildAndExpand(product.getProductId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
 
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
+    @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") long id, @RequestBody Product product) {
 
         Product currentProduct = productService.findById(id);
@@ -55,16 +55,16 @@ public class ProductController {
             return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
         }
 
-        currentProduct.setNameProduct(product.getNameProduct());
-        currentProduct.setStatusProduct(product.getStatusProduct());
-        currentProduct.setDescriptionProduct(product.getDescriptionProduct());
-        currentProduct.setId(product.getId());
+        currentProduct.setProductName(product.getProductName());
+        currentProduct.setProductStatus(product.getProductStatus());
+        currentProduct.setProductDescription(product.getProductDescription());
+        currentProduct.setProductId(product.getProductId());
 
         productService.save(currentProduct);
         return new ResponseEntity<Product>(currentProduct, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") long id) {
 
         Product product = productService.findById(id);

@@ -7,39 +7,39 @@ import javax.persistence.*;
 public class Categories {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long categoriesId;
-    private String categoriesName;
-    private String categoriesStatus;
+    private Long categoryId;
+    private String categoryName;
+    private String categoryStatus;
 
     public Categories() {
     }
 
-    public Categories(String categoriesName, String categoriesStatus) {
-        this.categoriesName = categoriesName;
-        this.categoriesStatus = categoriesStatus;
+    public Categories(String categoryName, String categoryStatus) {
+        this.categoryName = categoryName;
+        this.categoryStatus = categoryStatus;
     }
 
-    public Long getCategoriesId() {
-        return categoriesId;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoriesId(Long categoriesId) {
-        this.categoriesId = categoriesId;
+    public void setCategoryId(Long categoriesId) {
+        this.categoryId = categoriesId;
     }
 
-    public String getCategoriesName() {
-        return categoriesName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategoriesName(String categoriesName) {
-        this.categoriesName = categoriesName;
+    public void setCategoryName(String categoriesName) {
+        this.categoryName = categoriesName;
     }
 
-    public String getCategoriesStatus() {
-        return categoriesStatus;
+    public String getCategoryStatus() {
+        return categoryStatus;
     }
 
-    public void setCategoriesStatus(String categoriesStatus) {
-        this.categoriesStatus = categoriesStatus;
+    public void setCategoryStatus(String categoriesStatus) {
+        this.categoryStatus = categoriesStatus;
     }
 }

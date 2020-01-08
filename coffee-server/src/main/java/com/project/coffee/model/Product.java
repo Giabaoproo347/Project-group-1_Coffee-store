@@ -3,53 +3,47 @@ package com.project.coffee.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="product")
+@Table(name="products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String nameProduct;
-    private String descriptionProduct;
-    private String statusProduct;
+    private Long productId;
+    private String productName;
+    private String productDescription;
+    private boolean productStatus;
 
     public Product() {
     }
 
-    public Product(String nameProduct, String descriptionProduct, String statusProduct) {
-        this.nameProduct = nameProduct;
-        this.descriptionProduct = descriptionProduct;
-        this.statusProduct = statusProduct;
+    public Long getProductId() {
+        return productId;
     }
 
-    public Long getId() {
-        return id;
+    public void setProductId(Long id) {
+        this.productId = id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getProductName() {
+        return productName;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
+    public void setProductName(String nameProduct) {
+        this.productName = nameProduct;
     }
 
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public String getDescriptionProduct() {
-        return descriptionProduct;
+    public void setProductDescription(String descriptionProduct) {
+        this.productDescription = descriptionProduct;
     }
 
-    public void setDescriptionProduct(String descriptionProduct) {
-        this.descriptionProduct = descriptionProduct;
+    public boolean getProductStatus() {
+        return productStatus;
     }
 
-    public String getStatusProduct() {
-        return statusProduct;
-    }
-
-    public void setStatusProduct(String statusProduct) {
-        this.statusProduct = statusProduct;
+    public void setProductStatus(boolean statusProduct) {
+        this.productStatus = statusProduct;
     }
 }

@@ -8,49 +8,44 @@ import javax.persistence.*;
 public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String namePromotion;
-    private Double pricePromotion;
-    private String statusPromotion;
+    private Long promotionId;
+    private String promotionName;
+    private Double promotionPrice;
+    private boolean promotionStatus;
 
     public Promotion() {
     }
 
-    public Promotion(String namePromotion, Double pricePromotion, String statusPromotion) {
-        this.namePromotion = namePromotion;
-        this.pricePromotion = pricePromotion;
-        this.statusPromotion = statusPromotion;
+
+    public Long getPromotionId() {
+        return promotionId;
     }
 
-    public Long getId() {
-        return id;
+    public void setPromotionId(Long id) {
+        this.promotionId = id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getPromotionName() {
+        return promotionName;
     }
 
-    public String getNamePromotion() {
-        return namePromotion;
+    public void setPromotionName(String namePromotion) {
+        this.promotionName = namePromotion;
     }
 
-    public void setNamePromotion(String namePromotion) {
-        this.namePromotion = namePromotion;
+    public Double getPromotionPrice() {
+        return promotionPrice;
     }
 
-    public Double getPricePromotion() {
-        return pricePromotion;
+    public void setPromotionPrice(Double pricePromotion) {
+        this.promotionPrice = pricePromotion;
     }
 
-    public void setPricePromotion(Double pricePromotion) {
-        this.pricePromotion = pricePromotion;
+    public boolean getPromotionStatus() {
+        return promotionStatus;
     }
 
-    public String getStatusPromotion() {
-        return statusPromotion;
-    }
-
-    public void setStatusPromotion(String statusPromotion) {
-        this.statusPromotion = statusPromotion;
+    public void setPromotionStatus(boolean statusPromotion) {
+        this.promotionStatus = statusPromotion;
     }
 }

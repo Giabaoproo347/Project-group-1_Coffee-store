@@ -1,6 +1,9 @@
 package com.project.coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,7 +15,8 @@ public class Members {
     private String email;
     private String password;
     private String memberName;
-    private Date memberDOB;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate memberDOB;
     private boolean gender;
     private String memberPhone;
     private String memberAddress;
@@ -53,11 +57,11 @@ public class Members {
         this.memberName = memberName;
     }
 
-    public Date getMemberDOB() {
+    public LocalDate getMemberDOB() {
         return memberDOB;
     }
 
-    public void setMemberDOB(Date memberDOB) {
+    public void setMemberDOB(LocalDate memberDOB) {
         this.memberDOB = memberDOB;
     }
 
