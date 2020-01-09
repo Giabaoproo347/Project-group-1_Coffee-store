@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
+
     @Override
     public Iterable<Product> findAll() {
         return productRepository.findAll();
@@ -20,11 +21,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void save(Product product) {
-productRepository.save(product);
+        productRepository.save(product);
     }
 
     @Override
     public void remove(Long id) {
-productRepository.deleteById(id);
+        productRepository.deleteById(id);
     }
 }

@@ -11,10 +11,12 @@ public class ApplicationConfig {
     public OrderService orderService() {
         return new OrderServiceImpl();
     }
+
     @Bean
     public OrderDetailService orderDetailService() {
         return new OrderDetailServiceImpl();
     }
+
     @Bean
     public MemberService memberService() {
         return new MemberServiceImpl();
@@ -38,5 +40,14 @@ public class ApplicationConfig {
     @Bean
     public PromotionService promotionService() {
         return new PromotionServiceImpl();
+    }
+
+    @Bean
+    public ProductDetailsService productDetailsService() {
+        return new ProductDetailsServiceImpl();
+    }
+    @Bean
+    public CapacityService capacityService(){
+        return new CapacityServiceImpl();
     }
 }
