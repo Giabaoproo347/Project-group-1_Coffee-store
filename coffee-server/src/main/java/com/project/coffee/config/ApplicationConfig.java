@@ -8,6 +8,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfig {
     @Bean
+    public OrderService orderService() {
+        return new OrderServiceImpl();
+    }
+    @Bean
+    public OrderDetailService orderDetailService() {
+        return new OrderDetailServiceImpl();
+    }
+    @Bean
     public MemberService memberService() {
         return new MemberServiceImpl();
     }
