@@ -9,12 +9,12 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long categoryId;
     private String categoryName;
-    private String categoryStatus;
+    private boolean categoryStatus;
 
     public Categories() {
     }
 
-    public Categories(String categoryName, String categoryStatus) {
+    public Categories(String categoryName, boolean categoryStatus) {
         this.categoryName = categoryName;
         this.categoryStatus = categoryStatus;
     }
@@ -35,11 +35,11 @@ public class Categories {
         this.categoryName = categoriesName;
     }
 
-    public String getCategoryStatus() {
+    public boolean getCategoryStatus() {
         return categoryStatus;
     }
 
-    public void setCategoryStatus(String categoriesStatus) {
+    public void setCategoryStatus(boolean categoriesStatus) {
         this.categoryStatus = categoriesStatus;
     }
 }

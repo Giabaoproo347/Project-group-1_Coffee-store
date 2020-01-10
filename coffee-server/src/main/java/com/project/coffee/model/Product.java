@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name="products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long productId;
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String productId;
     private String productName;
     private String productDescription;
     private boolean productStatus;
@@ -15,11 +15,11 @@ public class Product {
     public Product() {
     }
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Long id) {
+    public void setProductId(String id) {
         this.productId = id;
     }
 

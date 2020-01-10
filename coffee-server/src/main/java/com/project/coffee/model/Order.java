@@ -1,7 +1,10 @@
 package com.project.coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -10,8 +13,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
-    private Date purchaseDate;
-    private Date deliveryDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate purchaseDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate deliveryDate;
     private String orderDescription;
 
     public Order() {
@@ -25,19 +30,19 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Date getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
-    public Date getDeliveryDate() {
+    public LocalDate getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
+    public void setDeliveryDate(LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 

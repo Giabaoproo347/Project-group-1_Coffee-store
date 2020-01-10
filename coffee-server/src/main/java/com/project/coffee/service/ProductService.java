@@ -4,7 +4,7 @@ import com.project.coffee.model.Product;
 
 public interface ProductService {
     Iterable<Product> findAll();
-    Product findById(Long id);
+    Product findById(String id);
     void save (Product product);
-    void remove (Long id);
+    void remove (String id);
 }

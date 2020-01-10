@@ -3,14 +3,12 @@ package com.project.coffee.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "db_capacity")
+@Table(name = "capacity")
 public class Capacity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long capacityId;
-    @Column
     private String capacityname;
-    @Column
     private Long capacityValue;
 
     public Long getCapacityId() {

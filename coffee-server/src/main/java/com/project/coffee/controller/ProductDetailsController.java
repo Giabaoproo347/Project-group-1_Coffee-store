@@ -1,7 +1,6 @@
 package com.project.coffee.controller;
 
 import com.project.coffee.model.ProductDetails;
-import com.project.coffee.model.Promotion;
 import com.project.coffee.service.ProductDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,12 +12,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.persistence.Entity;
 import java.util.List;
 
-@Entity
-@CrossOrigin(maxAge = 3600)
+@RestController
 public class ProductDetailsController {
     @Autowired
     ProductDetailsService productDetailsService;
-    @RequestMapping(value = "/productdetails", method = RequestMethod.GET)
+    @RequestMapping(value = "/product-details", method = RequestMethod.GET)
     public ResponseEntity<List<ProductDetails>> showProductdetails(){
         List<ProductDetails> productDetails = (List<ProductDetails>) productDetailsService.findAll();
         if(productDetails.isEmpty()){
@@ -28,8 +26,8 @@ public class ProductDetailsController {
         }
     }
 
-    @RequestMapping(value ="/productdetails/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ProductDetails> getProductdetail(@PathVariable ("id") long id){
+    @RequestMapping(value ="/product-details/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ProductDetails> getProductdetail(@PathVariable ("id") Long id){
         ProductDetails productDetails = productDetailsService.findById(id);
         if(productDetails == null){
             System.out.println(" khong cos phan tu can lay");
@@ -39,7 +37,7 @@ public class ProductDetailsController {
         }
     }
 
-    @RequestMapping(value = "/productdetails", method = RequestMethod.POST)
+    @RequestMapping(value = "/product-details", method = RequestMethod.POST)
     public ResponseEntity<Void> createPromotion(@RequestBody ProductDetails productDetails, UriComponentsBuilder ucBuilder) {
         productDetailsService.save(productDetails);
         HttpHeaders headers = new HttpHeaders();
@@ -48,8 +46,8 @@ public class ProductDetailsController {
     }
 
 
-    @RequestMapping(value = "/productdetail/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<ProductDetails> updateProductDetail(@PathVariable("id") long id, @RequestBody ProductDetails productDetails) {
+    @RequestMapping(value = "/product-detail/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<ProductDetails> updateProductDetail(@PathVariable("id") Long id, @RequestBody ProductDetails productDetails) {
 
         ProductDetails _productDetails = productDetailsService.findById(id);
 
@@ -67,8 +65,8 @@ public class ProductDetailsController {
     }
 
 
-    @DeleteMapping("/productdetail/{id}")
-    public ResponseEntity<ProductDetails> deleteProductdDetail(@PathVariable("id") long id) {
+    @DeleteMapping("/product-detail/{id}")
+    public ResponseEntity<ProductDetails> deleteProductdDetail(@PathVariable("id") Long id) {
 
         ProductDetails productDetails = productDetailsService.findById(id);
         if (productDetails == null) {

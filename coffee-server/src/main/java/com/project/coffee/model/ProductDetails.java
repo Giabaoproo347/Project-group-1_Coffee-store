@@ -3,16 +3,13 @@ package com.project.coffee.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "db_productdetails")
+@Table(name = "productDetais")
 public class ProductDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productDetailId;
-    @Column
     private Long price;
-    @Column
     private Long entryPrice;
-    @Column
     private Long quantity;
 
     public Long getProductDetailId() {
