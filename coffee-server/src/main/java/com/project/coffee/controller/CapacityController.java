@@ -59,7 +59,7 @@ public class CapacityController {
         }
  }
 
-@RequestMapping(value = "/capacity/{id}")
+@RequestMapping(value = "/capacity/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Capacity> deleteCapacity(@PathVariable("id") Long id){
         Capacity _capacity = capacityService.findById(id);
         if(_capacity == null){

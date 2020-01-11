@@ -1,5 +1,6 @@
 package com.project.coffee.model;
 
+import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,8 +9,14 @@ import javax.persistence.*;
 @Table(name="products")
 public class Product {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GenericGenerator(name = "id_gen",
+            strategy = "com.project.coffee.config.StringPrefixedSequenceIdGenerator",
+    parameters = {
+            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "00"),
+            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "produc_"),
+            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%03d")
+    })
+    @GeneratedValue(generator = "id_gen")
     private String productId;
     private String productName;
     private String productDescription;
