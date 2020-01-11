@@ -3,7 +3,7 @@ import com.project.coffee.model.Promotion;
 
 public interface PromotionService {
     Iterable<Promotion> findAll();
-    Promotion findById(Long id);
+    Promotion findById(String id);
     void save (Promotion product);
-    void remove (Long id);
+    void remove (String id);
 }

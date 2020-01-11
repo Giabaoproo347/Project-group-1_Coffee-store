@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Members findById(Long id) {
+    public Members findById(String id) {
         return memberRepository.findById(id).orElse(null);
     }
 
@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(String id) {
         memberRepository.deleteById(id);
     }
 }

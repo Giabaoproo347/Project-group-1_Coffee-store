@@ -26,7 +26,7 @@ public class MemberController {
     }
 
     @GetMapping("/members/{id}")
-    public ResponseEntity<Members> getMember(@PathVariable Long id) {
+    public ResponseEntity<Members> getMember(@PathVariable String id) {
         Members members = memberService.findById(id);
         if (members == null) {
             return new ResponseEntity<Members>(HttpStatus.NOT_FOUND);
@@ -43,7 +43,7 @@ public class MemberController {
     }
 
     @PutMapping("/members/{id}")
-    public ResponseEntity<Members> updateMember(@PathVariable Long id, @RequestBody Members members) {
+    public ResponseEntity<Members> updateMember(@PathVariable String id, @RequestBody Members members) {
         Members currentMember = memberService.findById(id);
 
         if (currentMember == null) {

@@ -27,7 +27,7 @@ public class ProductDetailsController {
     }
 
     @RequestMapping(value ="/product-details/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ProductDetails> getProductdetail(@PathVariable ("id") Long id){
+    public ResponseEntity<ProductDetails> getProductdetail(@PathVariable ("id") String id){
         ProductDetails productDetails = productDetailsService.findById(id);
         if(productDetails == null){
             System.out.println(" khong cos phan tu can lay");
@@ -47,7 +47,7 @@ public class ProductDetailsController {
 
 
     @RequestMapping(value = "/product-detail/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<ProductDetails> updateProductDetail(@PathVariable("id") Long id, @RequestBody ProductDetails productDetails) {
+    public ResponseEntity<ProductDetails> updateProductDetail(@PathVariable("id") String id, @RequestBody ProductDetails productDetails) {
 
         ProductDetails _productDetails = productDetailsService.findById(id);
 
@@ -66,7 +66,7 @@ public class ProductDetailsController {
 
 
     @DeleteMapping("/product-detail/{id}")
-    public ResponseEntity<ProductDetails> deleteProductdDetail(@PathVariable("id") Long id) {
+    public ResponseEntity<ProductDetails> deleteProductdDetail(@PathVariable("id") String id) {
 
         ProductDetails productDetails = productDetailsService.findById(id);
         if (productDetails == null) {

@@ -14,7 +14,7 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public Promotion findById(Long id) {
+    public Promotion findById(String id) {
         return promotionRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ promotionRepository.save(promotion);
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(String id) {
 promotionRepository.deleteById(id);
     }
 }

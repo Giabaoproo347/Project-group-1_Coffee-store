@@ -29,7 +29,7 @@ public class CapacityController {
     }
 
 @RequestMapping(value = "/capacity/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Capacity> getCapacity(@PathVariable("id") long id){
+    public ResponseEntity<Capacity> getCapacity(@PathVariable("id") String id){
         Capacity capacity = capacityService.findById(id);
         if(capacity == null){
             return new ResponseEntity<Capacity>(HttpStatus.NOT_FOUND);
@@ -46,7 +46,7 @@ public class CapacityController {
     return new ResponseEntity<Capacity>(headers, HttpStatus.CREATED);
 }
  @RequestMapping(value = "/capacity/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Capacity> updateCapacity(@RequestBody Capacity capacity, @PathVariable("id") Long id){
+    public ResponseEntity<Capacity> updateCapacity(@RequestBody Capacity capacity, @PathVariable("id") String id){
         Capacity capacity1 = capacityService.findById(id);
         if(capacity1 == null){
             System.out.println(" khong tin thay phan tu can sua");
@@ -60,7 +60,7 @@ public class CapacityController {
  }
 
 @RequestMapping(value = "/capacity/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Capacity> deleteCapacity(@PathVariable("id") Long id){
+    public ResponseEntity<Capacity> deleteCapacity(@PathVariable("id") String id){
         Capacity _capacity = capacityService.findById(id);
         if(_capacity == null){
             System.out.println("khong ton tai phan tu can xoa");

@@ -1,6 +1,8 @@
 package com.project.coffee.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,8 +12,15 @@ import java.util.Date;
 @Table(name = "members")
 public class Members {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long memberId;
+    @GenericGenerator(name = "id_gen",
+            strategy = "com.project.coffee.config.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "00"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "MEMBER_"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%03d")
+            })
+    @GeneratedValue(generator = "id_gen")
+    private String memberId;
     private String email;
     private String password;
     private String memberName;
@@ -25,11 +34,11 @@ public class Members {
     public Members() {
     }
 
-    public Long getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Long memberId) {
+    public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
 

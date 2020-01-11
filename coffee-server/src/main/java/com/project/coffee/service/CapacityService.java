@@ -5,9 +5,9 @@ import com.project.coffee.model.Capacity;
 public interface CapacityService {
     Iterable<Capacity> findAll();
 
-    Capacity findById(Long id);
+    Capacity findById(String id);
 
     void save(Capacity capacity);
 
-    void remove(Long id);
+    void remove(String id);
 }

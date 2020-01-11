@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CapacityRepository extends JpaRepository<Capacity, Long> {
+public interface CapacityRepository extends JpaRepository<Capacity, String> {
 
 }

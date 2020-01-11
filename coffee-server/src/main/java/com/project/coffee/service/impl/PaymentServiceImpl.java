@@ -15,7 +15,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payments findById(Long id) {
+    public Payments findById(String id) {
         return paymentRepository.findById(id).orElse(null);
     }
 
@@ -25,7 +25,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(String id) {
         paymentRepository.deleteById(id);
     }
 }

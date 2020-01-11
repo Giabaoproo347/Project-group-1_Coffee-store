@@ -4,7 +4,7 @@ import com.project.coffee.model.Payments;
 
 public interface PaymentService {
     Iterable<Payments> findAll();
-    Payments findById (Long id);
+    Payments findById (String id);
     void save (Payments payments);
-    void remove (Long id);
+    void remove (String id);
 }

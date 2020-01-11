@@ -1,13 +1,23 @@
 package com.project.coffee.model;
 
+import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "orderdetail")
 public class OrderDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long orderDetailId;
+    @GenericGenerator(name = "id_gen",
+            strategy = "com.project.coffee.config.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "00"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "ORDERDETAIL_"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%03d")
+            })
+    @GeneratedValue(generator = "id_gen")
+    private String orderDetailId;
     private Double salePrice;
     private Long Quantity;
     private Double totalPay;
@@ -15,11 +25,11 @@ public class OrderDetails {
     public OrderDetails() {
     }
 
-    public Long getOrderDetailId() {
+    public String getOrderDetailId() {
         return orderDetailId;
     }
 
-    public void setOrderDetailId(Long orderDetailId) {
+    public void setOrderDetailId(String orderDetailId) {
         this.orderDetailId = orderDetailId;
     }
 

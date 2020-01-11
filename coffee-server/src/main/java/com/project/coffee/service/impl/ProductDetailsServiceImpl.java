@@ -16,7 +16,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
-    public ProductDetails findById(Long id) {
+    public ProductDetails findById(String id) {
         return productDetailsRepository.findById(id).orElse(null);
     }
 
@@ -26,7 +26,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(String id) {
         productDetailsRepository.deleteById(id);
     }
 }

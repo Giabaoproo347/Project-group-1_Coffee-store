@@ -17,7 +17,7 @@ public class CapacityServiceImpl implements CapacityService {
     }
 
     @Override
-    public Capacity findById(Long id) {
+    public Capacity findById(String id) {
         return capacityRepository.findById(id).orElse(null);
     }
 
@@ -27,7 +27,7 @@ public class CapacityServiceImpl implements CapacityService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(String id) {
         capacityRepository.deleteById(id);
     }
 }

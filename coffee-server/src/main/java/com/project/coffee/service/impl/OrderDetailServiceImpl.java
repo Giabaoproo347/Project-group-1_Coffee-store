@@ -14,7 +14,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public OrderDetails findById(Long id) {
+    public OrderDetails findById(String id) {
         return orderDetailRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(String id) {
         orderDetailRepository.deleteById(id);
     }
 }

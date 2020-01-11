@@ -28,7 +28,7 @@ public class CategoriesController {
     }
 
     @GetMapping("/categories/{id}")
-    public ResponseEntity<Categories> getCategories(@PathVariable("id") long id) {
+    public ResponseEntity<Categories> getCategories(@PathVariable("id") String id) {
         System.out.println("Fetching Categories with id " + id);
         Categories categories = categoriesService.findById(id);
         if (categories == null) {
@@ -47,7 +47,7 @@ public class CategoriesController {
     }
 
     @PutMapping("/categories/{id}")
-    public ResponseEntity<Categories> updateCustomer(@PathVariable("id") long id, @RequestBody Categories categories) {
+    public ResponseEntity<Categories> updateCustomer(@PathVariable("id") String id, @RequestBody Categories categories) {
         System.out.println("Updating Customer " + id);
 
         Categories currentCategories = categoriesService.findById(id);
@@ -66,7 +66,7 @@ public class CategoriesController {
     }
 
     @DeleteMapping("/categories/{id}")
-    public ResponseEntity<Categories> deleteCategories(@PathVariable("id") long id) {
+    public ResponseEntity<Categories> deleteCategories(@PathVariable("id") String id) {
         System.out.println("Fetching & Deleting Categories with id " + id);
 
         Categories categories = categoriesService.findById(id);

@@ -14,7 +14,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public Categories findById(Long id) {
+    public Categories findById(String id) {
         return categoriesRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(String id) {
     categoriesRepository.deleteById(id);
     }
 }

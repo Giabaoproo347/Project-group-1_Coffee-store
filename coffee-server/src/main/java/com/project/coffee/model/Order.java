@@ -1,6 +1,8 @@
 package com.project.coffee.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,8 +13,15 @@ import java.time.LocalDate;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long orderId;
+    @GenericGenerator(name = "id_gen",
+            strategy = "com.project.coffee.config.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "00"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "ORDER_"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%03d")
+            })
+    @GeneratedValue(generator = "id_gen")
+    private String orderId;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate purchaseDate;
     @JsonFormat(pattern = "dd-MM-yyyy")
@@ -22,11 +31,11 @@ public class Order {
     public Order() {
     }
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

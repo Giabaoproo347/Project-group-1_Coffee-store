@@ -1,29 +1,35 @@
 package com.project.coffee.model;
 
+import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="categories")
 public class Categories {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long categoryId;
+    @GenericGenerator(name = "id_gen",
+            strategy = "com.project.coffee.config.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "00"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "CATEGORY_"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%03d")
+            })
+    @GeneratedValue(generator = "id_gen")
+    private String categoryId;
     private String categoryName;
     private boolean categoryStatus;
 
     public Categories() {
     }
 
-    public Categories(String categoryName, boolean categoryStatus) {
-        this.categoryName = categoryName;
-        this.categoryStatus = categoryStatus;
-    }
 
-    public Long getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoriesId) {
+    public void setCategoryId(String categoriesId) {
         this.categoryId = categoriesId;
     }
 

@@ -4,7 +4,7 @@ import com.project.coffee.model.Categories;
 
 public interface CategoriesService {
     Iterable<Categories> findAll();
-    Categories findById(Long id);
+    Categories findById(String id);
     void save ( Categories categories);
-    void  remove (Long id);
+    void  remove (String id);
 }

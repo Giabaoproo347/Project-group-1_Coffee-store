@@ -27,7 +27,7 @@ public class PromotionController {
     }
 
     @GetMapping("/promotion/{id}")
-    public ResponseEntity<Promotion> getProduct(@PathVariable("id") long id) {
+    public ResponseEntity<Promotion> getProduct(@PathVariable("id") String id) {
         Promotion promotion = promotionService.findById(id);
         if (promotion == null) {
             return new ResponseEntity<Promotion>(HttpStatus.NOT_FOUND);
@@ -45,7 +45,7 @@ public class PromotionController {
 
 
     @PutMapping("/promotion/{id}")
-    public ResponseEntity<Promotion> updatePromotion(@PathVariable("id") long id, @RequestBody Promotion promotion) {
+    public ResponseEntity<Promotion> updatePromotion(@PathVariable("id") String id, @RequestBody Promotion promotion) {
 
         Promotion currenPromotion = promotionService.findById(id);
 
@@ -64,7 +64,7 @@ public class PromotionController {
 
 
     @DeleteMapping("/promotion/{id}")
-    public ResponseEntity<Promotion> deletePromotion(@PathVariable("id") long id) {
+    public ResponseEntity<Promotion> deletePromotion(@PathVariable("id") String id) {
 
         Promotion promotion = promotionService.findById(id);
         if (promotion == null) {

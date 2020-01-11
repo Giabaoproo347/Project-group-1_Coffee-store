@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{id}")
-    public ResponseEntity<Order> getCategories(@PathVariable("id") long id) {
+    public ResponseEntity<Order> getCategories(@PathVariable("id") String id) {
         System.out.println("Fetching Order with id " + id);
         Order order = orderService.findById(id);
         if (order == null) {
@@ -44,7 +44,7 @@ public class OrderController {
     }
 
     @PutMapping("/orders/{id}")
-    public ResponseEntity<Order> updateCustomer(@PathVariable("id") long id, @RequestBody Order order) {
+    public ResponseEntity<Order> updateCustomer(@PathVariable("id") String id, @RequestBody Order order) {
         System.out.println("Updating order " + id);
 
         Order currentOrder = orderService.findById(id);
@@ -63,7 +63,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/orders/{id}")
-    public ResponseEntity<Order> deleteOrders(@PathVariable("id") long id) {
+    public ResponseEntity<Order> deleteOrders(@PathVariable("id") String id) {
         System.out.println("Fetching & Deleting Order with id " + id);
 
         Order order = orderService.findById(id);

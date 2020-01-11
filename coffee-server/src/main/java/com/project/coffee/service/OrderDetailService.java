@@ -4,7 +4,7 @@ import com.project.coffee.model.OrderDetails;
 
 public interface OrderDetailService {
     Iterable<OrderDetails> findAll();
-    OrderDetails findById(Long id);
+    OrderDetails findById(String id);
     void save (OrderDetails orderDetails);
-    void remove (Long id);
+    void remove (String id);
 }

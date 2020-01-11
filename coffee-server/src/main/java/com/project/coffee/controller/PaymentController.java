@@ -26,7 +26,7 @@ public class PaymentController {
     }
 
     @GetMapping("/payments/{id}")
-    public ResponseEntity<Payments> getPayment(@PathVariable Long id) {
+    public ResponseEntity<Payments> getPayment(@PathVariable String id) {
         Payments payments = paymentService.findById(id);
         if (payments == null) {
             return new ResponseEntity<Payments>(HttpStatus.NOT_FOUND);
@@ -43,7 +43,7 @@ public class PaymentController {
     }
 
     @PutMapping("/payments/{id}")
-    public ResponseEntity<Payments> updatePayment(@PathVariable Long id, @RequestBody Payments payments) {
+    public ResponseEntity<Payments> updatePayment(@PathVariable String id, @RequestBody Payments payments) {
         Payments currentPayment = paymentService.findById(id);
 
         if (currentPayment == null) {

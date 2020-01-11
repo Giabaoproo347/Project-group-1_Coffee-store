@@ -27,7 +27,7 @@ public class OrderDetailController {
 
 
     @GetMapping("/orderDetails/{id}")
-    public ResponseEntity<OrderDetails> getOrderDetails(@PathVariable Long id) {
+    public ResponseEntity<OrderDetails> getOrderDetails(@PathVariable String id) {
         OrderDetails orderDetails = orderDetailService.findById(id);
         if (orderDetails == null) {
             return new ResponseEntity<OrderDetails>(HttpStatus.NOT_FOUND);
@@ -44,7 +44,7 @@ public class OrderDetailController {
     }
 
     @PutMapping("/orderDetails/{id}")
-    public ResponseEntity<OrderDetails> updateOrderDetails(@PathVariable Long id, @RequestBody OrderDetails orderDetails) {
+    public ResponseEntity<OrderDetails> updateOrderDetails(@PathVariable String id, @RequestBody OrderDetails orderDetails) {
         OrderDetails currentOrderDetails = orderDetailService.findById(id);
 
         if (currentOrderDetails == null) {
