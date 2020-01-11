@@ -21,6 +21,8 @@ public class Capacity {
     private String capacityname;
     private Long capacityValue;
 
+
+
     public String getCapacityId() {
         return capacityId;
     }
