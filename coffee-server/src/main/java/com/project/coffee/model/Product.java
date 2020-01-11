@@ -4,6 +4,7 @@ import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="products")
@@ -22,7 +23,43 @@ public class Product {
     private String productDescription;
     private boolean productStatus;
 
-    public Product() {
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Categories categories;
+
+    @ManyToOne
+    @JoinColumn (name = "promotionId")
+    private Promotion promotion;
+
+    @OneToMany (targetEntity = ProductDetails.class)
+    private Set<ProductDetails> productDetails;
+
+    public Set<ProductDetails> getProductDetails() {
+        return productDetails;
+    }
+
+    public void setProductDetails(Set<ProductDetails> productDetails) {
+        this.productDetails = productDetails;
+    }
+
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
+    }
+
+    public boolean isProductStatus() {
+        return productStatus;
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Categories categories) {
+        this.categories = categories;
     }
 
     public String getProductId() {

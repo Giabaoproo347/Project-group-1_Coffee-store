@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "payments")
@@ -25,7 +26,15 @@ public class Payments {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate paymentDate;
 
-    public Payments() {
+    @OneToMany (targetEntity = Order.class)
+    private Set<Order> orders;
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     public String getPaymentId() {

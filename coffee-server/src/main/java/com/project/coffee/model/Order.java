@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Set;
 
 
 @Entity
@@ -28,7 +29,39 @@ public class Order {
     private LocalDate deliveryDate;
     private String orderDescription;
 
-    public Order() {
+    @OneToMany (targetEntity = OrderDetails.class)
+    private Set<OrderDetails> orderDetails;
+
+    @ManyToOne
+    @JoinColumn (name = "paymentId")
+    private Payments payments;
+
+    @ManyToOne
+    @JoinColumn (name = "memberId")
+    private Members  members;
+
+    public Members getMembers() {
+        return members;
+    }
+
+    public void setMembers(Members members) {
+        this.members = members;
+    }
+
+    public Payments getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Payments payments) {
+        this.payments = payments;
+    }
+
+    public Set<OrderDetails> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(Set<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     public String getOrderId() {

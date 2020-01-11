@@ -22,6 +22,42 @@ public class ProductDetails {
     private Long entryPrice;
     private Long quantity;
 
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn (name = "capacityId")
+    private Capacity capacity;
+
+    @ManyToOne
+    @JoinColumn (name = "orderDetailId")
+    private OrderDetails orderDetails;
+
+    public Capacity getCapacity() {
+        return capacity;
+    }
+
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    public void setCapacity(Capacity capacity) {
+        this.capacity = capacity;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public String getProductDetailId() {
         return productDetailId;
     }

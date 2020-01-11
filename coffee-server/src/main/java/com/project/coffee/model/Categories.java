@@ -4,6 +4,7 @@ import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="categories")
@@ -21,9 +22,20 @@ public class Categories {
     private String categoryName;
     private boolean categoryStatus;
 
-    public Categories() {
+    @OneToMany(targetEntity = Product.class)
+    private Set<Product> products;
+
+    public boolean isCategoryStatus() {
+        return categoryStatus;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
     public String getCategoryId() {
         return categoryId;

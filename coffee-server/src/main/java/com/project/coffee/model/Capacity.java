@@ -4,6 +4,7 @@ import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "capacity")
@@ -21,7 +22,16 @@ public class Capacity {
     private String capacityname;
     private Long capacityValue;
 
+    public Set<ProductDetails> getProductDetails() {
+        return productDetails;
+    }
 
+    public void setProductDetails(Set<ProductDetails> productDetails) {
+        this.productDetails = productDetails;
+    }
+
+    @OneToMany (targetEntity = ProductDetails.class)
+    private Set<ProductDetails> productDetails;
 
     public String getCapacityId() {
         return capacityId;
