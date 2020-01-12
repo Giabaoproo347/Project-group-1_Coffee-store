@@ -8,7 +8,21 @@ import {Category} from '../models/category.model';
 })
 export class CategoryService {
   private readonly CATEGORY_URL = 'http://localhost:8080/categories';
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
+
+  private data;
+
+  setData(data) {
+    this.data = data;
+  }
+
+  getData() {
+    const tmp = this.data;
+    this.clearData();
+    return tmp;
+  }
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.CATEGORY_URL);
@@ -28,5 +42,9 @@ export class CategoryService {
 
   updateCategory(category: Category): Observable<Category> {
     return this.http.patch<Category>(`${this.CATEGORY_URL}/${category.categoryId}`, category);
+  }
+
+  private clearData() {
+    this.data = undefined;
   }
 }
