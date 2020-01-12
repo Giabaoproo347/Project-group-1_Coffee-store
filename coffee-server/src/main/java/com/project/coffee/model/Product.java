@@ -21,6 +21,7 @@ public class Product {
     private String productId;
     private String productName;
     private String productDescription;
+    private String productImage;
     private boolean productStatus;
 
     @ManyToOne
@@ -42,6 +43,13 @@ public class Product {
         this.productDetails = productDetails;
     }
 
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
     public Promotion getPromotion() {
         return promotion;
     }
