@@ -1,1 +1,26 @@
-<p>order-detail-list works!</p>
+<button routerLink="/orderDetail/orderDetail-add" class="btn btn-primary">Create new capacity</button>
+<table class="table table-striped, form-group col-md-6">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Sale Price</th>
+  <th scope="row">Quantity</th>
+  <th scope="row">Total Pay</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let orderDetail of listOrderDetails, index as i">
+    <td>{{orderDetail.orderDetailId}}</td>
+    <td>{{orderDetail.salePrice}}</td>
+    <td>{{orderDetail.quantity}}</td>
+    <td>{{orderDetail.totalPay}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/orderDetail/orderDetail-edit',orderDetail.orderDetailId]" class="btn btn-primary">Edit</button>
+      </td>
+      <td>
+        <button (click)="delete(orderDetail)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>

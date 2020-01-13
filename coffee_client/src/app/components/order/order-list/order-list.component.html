@@ -1,1 +1,27 @@
-<p>order-list works!</p>
+<button routerLink="/order/order-add" class="btn btn-primary">Create new order</button>
+<table class="table table-striped, form-group col-md-6">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Purchase Date</th>
+  <th scope="row">Delivery Date</th>
+  <th scope="row">Description</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of listOrders, index as i">
+    <td>{{i + 1}}</td>
+    <td>{{order.orderId}}</td>
+    <td>{{order.purchaseDate}}</td>
+    <td>{{order.deliveryDate}}</td>
+    <td>{{order.orderDescription}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/order/order-edit',order.orderId]" class="btn btn-primary">Edit</button>
+      </td>
+      <td>
+        <button (click)="delete(order)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>

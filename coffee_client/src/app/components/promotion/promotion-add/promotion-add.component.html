@@ -1,1 +1,13 @@
-<p>promotion-add works!</p>
+<a routerLink="/promotion/promotion-list">Back to home</a>
+<h3>Create Promotion</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="createForm">
+  <p>Name</p>
+  <input type="text" placeholder="Purchase Date" formControlName="promotionName">
+  <p>Price</p>
+  <input type="text" placeholder="Delivery Date" formControlName="promotionPrice">
+  <p>Status</p>
+  <input type="text" placeholder="Description" formControlName="promotionStatus">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

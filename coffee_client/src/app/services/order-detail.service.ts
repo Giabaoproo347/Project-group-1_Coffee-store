@@ -16,7 +16,7 @@ export class OrderDetailService {
     return this.http.get<OrderDetail[]>(this.ORDERDETAILSERVICE_URL);
   }
 
-  getOrderDetailById(id: number): Observable<OrderDetail> {
+  getOrderDetailById(id: string): Observable<OrderDetail> {
     return this.http.get<OrderDetail>(`${this.ORDERDETAILSERVICE_URL}/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class OrderDetailService {
     return this.http.post<OrderDetail>(`${this.ORDERDETAILSERVICE_URL}`, orderDetail);
   }
 
-  deleteOrderDetail(id: number): Observable<any> {
-    return this.http.delete(`${this.ORDERDETAILSERVICE_URL}/${id}`);
+  deleteOrderDetail(orderDetail: OrderDetail): Observable<any> {
+    return this.http.delete(`${this.ORDERDETAILSERVICE_URL}/${orderDetail.orderDetailId}`);
   }
 
-  updateOrderDetail(orderDetail: OrderDetail): Observable<OrderDetail> {
-    return this.http.patch<OrderDetail>(`${this.ORDERDETAILSERVICE_URL}/${orderDetail.orderDetailId}`, orderDetail);
+  updateOrderDetail(orderDetail: OrderDetail): Observable<any> {
+    return this.http.put(`${this.ORDERDETAILSERVICE_URL}/${orderDetail.orderDetailId}`, orderDetail);
   }
 }

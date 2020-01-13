@@ -16,7 +16,7 @@ export class PromotionService {
     return this.http.get<Promotion[]>(this.PROMOTION_URL);
   }
 
-  getPromotionById(id: number): Observable<Promotion> {
+  getPromotionById(id: string): Observable<Promotion> {
     return this.http.get<Promotion>(`${this.PROMOTION_URL}/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class PromotionService {
     return this.http.post<Promotion>(`${this.PROMOTION_URL}`, promotion);
   }
 
-  deletePromotion(id: number): Observable<any> {
-    return this.http.delete(`${this.PROMOTION_URL}/${id}`);
+  deletePromotion(promotion: Promotion): Observable<any> {
+    return this.http.delete(`${this.PROMOTION_URL}/${promotion.promotionId}`);
   }
 
-  updatePromotion(promotion: Promotion): Observable<Promotion> {
-    return this.http.patch<Promotion>(`${this.PROMOTION_URL}/${promotion.promotionId}`, promotion);
+  updatePromotion(promotion: Promotion): Observable<any> {
+    return this.http.put(`${this.PROMOTION_URL}/${promotion.promotionId}`, promotion);
   }
 }

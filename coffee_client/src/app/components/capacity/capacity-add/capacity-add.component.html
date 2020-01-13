@@ -1,1 +1,11 @@
-<p>capacity-add works!</p>
+<a routerLink="/capacity/capacity-list">Back to home</a>
+<h3>Create Capacity</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="createForm">
+  <p>Name</p>
+  <input type="text" placeholder="name" formControlName="capacityName">
+  <p>Status</p>
+  <input type="text" placeholder="value" formControlName="capacityValue">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

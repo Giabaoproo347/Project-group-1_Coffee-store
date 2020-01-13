@@ -1,1 +1,25 @@
-<p>member-edit works!</p>
+<a routerLink="/member/member-list">Back to home</a>
+<h3>Edit Member</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="editForm">
+  <input type="hidden" formControlName="memberId">
+  <p>Email</p>
+  <input type="text" placeholder="Email" formControlName="email">
+  <p>Password</p>
+  <input type="text" placeholder="Password" formControlName="password">
+  <p>Name</p>
+  <input type="text" placeholder="Name" formControlName="memberName">
+  <p>DOB</p>
+  <input type="text" placeholder="DOB" formControlName="memberDOB">
+  <p>Gender</p>
+  <input type="text" placeholder="Gender" formControlName="gender">
+  <p>Phone</p>
+  <input type="text" placeholder="Phone" formControlName="memberPhone">
+  <p>Address</p>
+  <input type="text" placeholder="Address" formControlName="memberAddress">
+  <p>Status</p>
+  <input type="text" placeholder="Status" formControlName="memberStatus">
+
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

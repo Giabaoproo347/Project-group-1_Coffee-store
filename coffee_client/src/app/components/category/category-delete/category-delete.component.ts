@@ -23,9 +23,9 @@ export class CategoryDeleteComponent implements OnInit {
 
   ngOnInit() {
     this.deleteForm = this.fb.group({
-      categoryId: [''],
-      categoryName: [''],
-      categoryStatus: ['']
+      capacityId: [''],
+      capacityName: [''],
+      capacityValue: ['']
     });
     const id = this.route.snapshot.paramMap.get('categoryId');
     this.categoryService.getCategoryId(id).subscribe(next => {

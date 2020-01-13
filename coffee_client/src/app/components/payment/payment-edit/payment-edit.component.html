@@ -1,1 +1,12 @@
-<p>payment-edit works!</p>
+<a routerLink="/payment/payment-list">Back to home</a>
+<h3>Edit Payment</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="editForm">
+  <input type="hidden" formControlName="paymentId">
+  <p>Name</p>
+  <input type="text" placeholder="Name" formControlName="paymentName">
+  <p>Date</p>
+  <input type="text" placeholder="Payment Date" formControlName="paymentDate">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

@@ -1,1 +1,12 @@
-<p>capacity-edit works!</p>
+<a routerLink="/capacity/capacity-list">Back to home</a>
+<h3>Edit Capacity</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="editForm">
+  <input type="hidden" formControlName="categoryId">
+  <p>Name</p>
+  <input type="text" placeholder="Name" formControlName="capacityName">
+  <p>Value</p>
+  <input type="text" placeholder="Status" formControlName="capacityValue">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

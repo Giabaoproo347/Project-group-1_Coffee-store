@@ -1,1 +1,14 @@
-<p>promotion-edit works!</p>
+<a routerLink="/promotion/promotion-list">Back to home</a>
+<h3>Edit Promotion</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="editForm">
+  <input type="hidden" formControlName="promotionId">
+  <p>Name</p>
+  <input type="text" placeholder="Purchase Date" formControlName="promotionName">
+  <p>Price</p>
+  <input type="text" placeholder="Delivery Date" formControlName="promotionPrice">
+  <p>Status</p>
+  <input type="text" placeholder="Description" formControlName="promotionStatus">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

@@ -1,1 +1,13 @@
-<p>order-add works!</p>
+<a routerLink="/order/order-list">Back to home</a>
+<h3>Create Order</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="createForm">
+  <p>Purchase Date</p>
+  <input type="text" placeholder="Purchase Date" formControlName="purchaseDate">
+  <p>Delivery Date</p>
+  <input type="text" placeholder="Delivery Date" formControlName="deliveryDate">
+  <p>Description</p>
+  <input type="text" placeholder="Description" formControlName="orderDescription">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

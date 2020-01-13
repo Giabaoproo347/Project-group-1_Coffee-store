@@ -1,1 +1,24 @@
-<p>capacity-list works!</p>
+<button routerLink="/capacity/capacity-add" class="btn btn-primary">Create new capacity</button>
+<table class="table table-striped, form-group col-md-6">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Name</th>
+  <th scope="row">Value</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let capacity of listCapacity, index as i">
+    <td>{{i + 1}}</td>
+    <td>{{capacity.capacityName}}</td>
+    <td>{{capacity.capacityValue}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/capacity/capacity-edit',capacity.capacityId]" class="btn btn-primary">Edit</button>
+      </td>
+      <td>
+        <button (click)="delete(capacity)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>

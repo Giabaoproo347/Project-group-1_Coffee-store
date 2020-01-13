@@ -1,1 +1,13 @@
-<p>order-detail-add works!</p>
+<a routerLink="/orderDetail/orderDetail-list">Back to home</a>
+<h3>Create Order Detail</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="createForm">
+  <p>Sale Price</p>
+  <input type="text" placeholder="Sale Price" formControlName="salePrice">
+  <p>Quantity</p>
+  <input type="text" placeholder="Quantity" formControlName="quantity">
+  <p>Total Pay</p>
+  <input type="text" placeholder="Total Pay" formControlName="totalPay">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

@@ -24,12 +24,12 @@ export class PaymentService {
     return this.http.post<Payment>(`${this.PAYMENT_URL}`, payment);
   }
 
-  deletePayment(id: string): Observable<any> {
-    return this.http.delete(`${this.PAYMENT_URL}/${id}`);
+  deletePayment(payment: Payment): Observable<any> {
+    return this.http.delete(`${this.PAYMENT_URL}/${payment.paymentId}`);
   }
 
-  updatePayment(payment: Payment): Observable<Payment> {
-    return this.http.patch<Payment>(`${this.PAYMENT_URL}/${payment.paymentId}`, payment);
+  updatePayment(payment: Payment): Observable<any> {
+    return this.http.put(`${this.PAYMENT_URL}/${payment.paymentId}`, payment);
   }
 
 }

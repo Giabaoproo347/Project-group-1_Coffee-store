@@ -1,1 +1,14 @@
-<p>order-detail-edit works!</p>
+<a routerLink="/orderDetail/orderDetail-list">Back to home</a>
+<h3>Edit Order Detail</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="editForm">
+  <input type="hidden" formControlName="orderDetailId">
+  <p>Sale Price</p>
+  <input type="text" placeholder="Sale Price" formControlName="salePrice">
+  <p>Quantity</p>
+  <input type="text" placeholder="Quantity" formControlName="quantity">
+  <p>Total Pay</p>
+  <input type="text" placeholder="Total Pay" formControlName="totalPay">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

@@ -22,8 +22,8 @@ export class MemberService {
     return this.http.post(`${this.MEMBER_URL}`, member);
   }
 
-  deleteMember(id: string): Observable<any> {
-    return this.http.delete(`${this.MEMBER_URL}/${id}`);
+  deleteMember(member: Member): Observable<any> {
+    return this.http.delete(`${this.MEMBER_URL}/${member.memberId}`);
   }
 
   updatMember(member: Member): Observable<any> {

@@ -3,6 +3,7 @@ import {Category} from '../../../models/category.model';
 import {CategoryService} from '../../../services/category.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {CapacityService} from '../../../services/capacity.service';
 
 @Component({
   selector: 'app-category-add',
@@ -12,7 +13,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class CategoryAddComponent implements OnInit {
   private createForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private categoryService: CategoryService) {
+  constructor(private fb: FormBuilder,
+              private categoryService: CategoryService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -31,5 +34,6 @@ export class CategoryAddComponent implements OnInit {
         });
       }
     );
+    this.router.navigate(['category/category-list']);
   }
 }

@@ -1,1 +1,26 @@
-<p>promotion-list works!</p>
+<button routerLink="/promotion/promotion-add" class="btn btn-primary">Create new promotion</button>
+<table class="table table-striped, form-group col-md-6">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Name</th>
+  <th scope="row">Price</th>
+  <th scope="row">Status</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let promotion of listPromotion, index as i">
+    <td>{{promotion.promotionId}}</td>
+    <td>{{promotion.promotionName}}</td>
+    <td>{{promotion.promotionPrice}}</td>
+    <td>{{promotion.promotionStatus}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/promotion/promotion-edit',promotion.promotionId]" class="btn btn-primary">Edit</button>
+      </td>
+      <td>
+        <button (click)="delete(promotion)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>

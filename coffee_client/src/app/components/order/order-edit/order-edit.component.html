@@ -1,1 +1,14 @@
-<p>order-edit works!</p>
+<a routerLink="/order/order-list">Back to home</a>
+<h3>Edit Order</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="editForm">
+  <input type="hidden" formControlName="orderId">
+  <p>Purchase Date</p>
+  <input type="text" placeholder="Purchase Date" formControlName="purchaseDate">
+  <p>Delivery Date</p>
+  <input type="text" placeholder="Delivery Date" formControlName="deliveryDate">
+  <p>Description</p>
+  <input type="text" placeholder="Description" formControlName="orderDescription">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

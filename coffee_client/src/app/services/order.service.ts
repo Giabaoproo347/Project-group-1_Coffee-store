@@ -16,7 +16,7 @@ export class OrderService {
     return this.http.get<Order[]>(this.ORDER_URL);
   }
 
-  getOrderById(id: number): Observable<Order> {
+  getOrderById(id: string): Observable<Order> {
     return this.http.get<Order>(`${this.ORDER_URL}/${id}`);
   }
 
@@ -24,12 +24,12 @@ export class OrderService {
     return this.http.post<Order>(`${this.ORDER_URL}`, order);
   }
 
-  deleteOrder(id: number): Observable<any> {
-    return this.http.delete(`${this.ORDER_URL}/${id}`);
+  deleteOrder(order: Order): Observable<any> {
+    return this.http.delete(`${this.ORDER_URL}/${order.orderId}`);
   }
 
-  updateOrder(order: Order): Observable<Order> {
-    return this.http.patch<Order>(`${this.ORDER_URL}/${order.orderId}`, order);
+  updateOrder(order: Order): Observable<any> {
+    return this.http.put(`${this.ORDER_URL}/${order.orderId}`, order);
   }
 
 }

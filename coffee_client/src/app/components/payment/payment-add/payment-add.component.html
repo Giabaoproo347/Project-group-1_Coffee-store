@@ -1,1 +1,11 @@
-<p>payment-add works!</p>
+<a routerLink="/order/order-list">Back to home</a>
+<h3>Create Payment</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="createForm">
+  <p>Name</p>
+  <input type="text" placeholder="Purchase Date" formControlName="paymentName">
+  <p>Date</p>
+  <input type="text" placeholder="Delivery Date" formControlName="paymentDate">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

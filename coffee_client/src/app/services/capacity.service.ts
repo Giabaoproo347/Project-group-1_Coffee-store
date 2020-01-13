@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Capacity} from '../models/capacity.model';
+import {Category} from '../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CapacityService {
     return this.http.get<Capacity[]>(this.CAPACITY_URL);
   }
 
-  getCapacityById(id: number): Observable<Capacity> {
+  getCapacityById(id: string): Observable<Capacity> {
     return this.http.get<Capacity>(`${this.CAPACITY_URL}/${id}`);
   }
 
@@ -22,8 +23,8 @@ export class CapacityService {
     return this.http.post<Capacity>(this.CAPACITY_URL, capacity);
   }
 
-  deleteCapacity(id: number): Observable<any> {
-    return this.http.delete(`${this.CAPACITY_URL}/${id}`);
+  deleteCapacity(capacity: Capacity): Observable<any> {
+    return this.http.delete(`${this.CAPACITY_URL}/${capacity.capacityId}`);
   }
 
   updateCapacity(capacity: Capacity): Observable<Capacity> {

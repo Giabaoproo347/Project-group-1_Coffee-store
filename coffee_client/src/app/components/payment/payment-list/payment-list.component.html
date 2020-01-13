@@ -1,1 +1,24 @@
-<p>payment-list works!</p>
+<button routerLink="/payment/payment-add" class="btn btn-primary">Create new payment</button>
+<table class="table table-striped, form-group col-md-6">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Name</th>
+  <th scope="row">Date</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let payment of listPayments, index as i">
+    <td>{{payment.paymentId}}</td>
+    <td>{{payment.paymentName}}</td>
+    <td>{{payment.paymentDate}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/payment/payment-edit',payment.paymentId]" class="btn btn-primary">Edit</button>
+      </td>
+      <td>
+        <button (click)="delete(payment)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>

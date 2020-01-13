@@ -1,1 +1,34 @@
-<p>member-list works!</p>
+<button routerLink="/member/member-add" class="btn btn-primary">Create new capacity</button>
+<table class="table table-striped, form-group col-md-12">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Email</th>
+  <th scope="row">Password</th>
+  <th scope="row">Name</th>
+  <th scope="row">DOB</th>
+  <th scope="row">Gender</th>
+  <th scope="row">Phone</th>
+  <th scope="row">Address</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let member of listMembers, index as i">
+    <td>{{member.memberId}}</td>
+    <td>{{member.email}}</td>
+    <td>{{member.password}}</td>
+    <td>{{member.memberName}}</td>
+    <td>{{member.memberDOB}}</td>
+    <td>{{member.gender}}</td>
+    <td>{{member.memberPhone}}</td>
+    <td>{{member.memberAddress}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/member/member-edit',member.memberId]" class="btn btn-primary">Edit</button>
+      </td>
+      <td>
+        <button (click)="delete(member)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>

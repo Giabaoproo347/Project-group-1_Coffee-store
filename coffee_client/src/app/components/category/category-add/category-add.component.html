@@ -1,10 +1,10 @@
-<a routerLink="/category/category-list">Back to home</a>
+<a routerLink="/capacity/capacity-list">Back to home</a>
 <h3>Create Category</h3>
 <form (ngSubmit)="onsubmit()" [formGroup]="createForm">
   <p>Name</p>
-  <input type="text" placeholder="first name" formControlName="categoryName">
+  <input type="text" placeholder="name" formControlName="categoryName">
   <p>Status</p>
-  <input type="text" placeholder="last name" formControlName="categoryStatus">
+  <input type="text" placeholder="value" formControlName="categoryStatus">
   <br>
   <br>
   <button type="submit">Submit</button>

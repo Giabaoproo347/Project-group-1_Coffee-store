@@ -16,7 +16,7 @@ export class ProductDetailService {
     return this.http.get<ProductDetail[]>(this.PRODUCTSERVICE_URL);
   }
 
-  getProductDetailById(id: number): Observable<ProductDetail> {
+  getProductDetailById(id: string): Observable<ProductDetail> {
     return this.http.get<ProductDetail>(`${this.PRODUCTSERVICE_URL}/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class ProductDetailService {
     return this.http.post<ProductDetail>(`${this.PRODUCTSERVICE_URL}`, productDetail);
   }
 
-  deleteProductDetail(id: number): Observable<any> {
-    return this.http.delete(`${this.PRODUCTSERVICE_URL}/${id}`);
+  deleteProductDetail(productDetail: ProductDetail): Observable<any> {
+    return this.http.delete(`${this.PRODUCTSERVICE_URL}/${productDetail.productDetailId}`);
   }
 
-  updateProductDetail(productDetail: ProductDetail): Observable<ProductDetail> {
-    return this.http.patch<ProductDetail>(`${this.PRODUCTSERVICE_URL}/${productDetail.productDetailId}`, productDetail);
+  updateProductDetail(productDetail: ProductDetail): Observable<any> {
+    return this.http.put(`${this.PRODUCTSERVICE_URL}/${productDetail.productDetailId}`, productDetail);
   }
 }

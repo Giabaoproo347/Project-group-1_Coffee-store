@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {OrderService} from '../../../services/order.service';
+import {Router} from '@angular/router';
+import {ProductDetailService} from '../../../services/product-detail.service';
+import {Order} from '../../../models/order.model';
 
 @Component({
   selector: 'app-product-detail-add',
@@ -6,10 +11,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-detail-add.component.css']
 })
 export class ProductDetailAddComponent implements OnInit {
+  private createForm: FormGroup;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private fb: FormBuilder,
+              private productDetailService: ProductDetailService,
+              private router: Router) {
   }
 
+  ngOnInit() {
+    this.createForm = this.fb.group({
+      price: [''],
+      entryPrice: [''],
+      quantity: ['']
+    });
+  }
+
+  onsubmit() {
+    const {value} = this.createForm;
+    this.productDetailService.createProductDetail(value).subscribe(next => {
+        this.createForm.reset({
+          price: [''],
+          entryPrice: [''],
+          quantity: ['']
+
+        });
+      }
+    );
+    this.router.navigate(['productDetail/productDetail-list']);
+  }
 }

@@ -1,1 +1,28 @@
-<p>product-detail-list works!</p>
+<button routerLink="/productDetail/productDetail-add" class="btn btn-primary">Create new product detail</button>
+<table class="table table-striped, form-group col-md-6">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Price</th>
+  <th scope="row">Entry Price</th>
+  <th scope="row">Quantity</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let productDetail of listProductDetails, index as i">
+    <td>{{productDetail.productDetailId}}</td>
+    <td>{{productDetail.price}}</td>
+    <td>{{productDetail.entryPrice}}</td>
+    <td>{{productDetail.quantity}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/productDetail/productDetail-edit',productDetail.productDetailId]"
+                class="btn btn-primary">Edit
+        </button>
+      </td>
+      <td>
+        <button (click)="delete(productDetail)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>
