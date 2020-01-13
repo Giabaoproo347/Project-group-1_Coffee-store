@@ -6,5 +6,6 @@ export class Order {
   public deliveryDate: string;
   public orderDescription: string;
   public salePrice: OrderDetail;
+  public orderDetail: OrderDetail;
 
 }

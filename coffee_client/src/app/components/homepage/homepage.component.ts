@@ -11,6 +11,7 @@ import {ShoppingCartService} from '../../services/shopping-cart.service';
 })
 export class HomepageComponent implements OnInit {
   public products: Observable<Product[]>;
+  listProducts: Product[];
 
   constructor(private productService: ProductService,
               private shoppingCartService: ShoppingCartService) {
@@ -37,6 +38,12 @@ export class HomepageComponent implements OnInit {
           obs.complete();
         });
       sub.unsubscribe();
+    });
+  }
+
+  delete(product: Product) {
+    this.productService.deleteProduct(product).subscribe(data => {
+      this.listProducts = this.listProducts.filter(p => p !== product);
     });
   }
 

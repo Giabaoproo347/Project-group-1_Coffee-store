@@ -1,3 +1,5 @@
+import {Order} from './order.model';
+
 export class Member {
   public memberId: string;
   public memberName: string;
@@ -8,4 +10,5 @@ export class Member {
   public memberPhone: string;
   public memberAddress: string;
   public memberStatus: boolean;
+  public order: Order[];
 }

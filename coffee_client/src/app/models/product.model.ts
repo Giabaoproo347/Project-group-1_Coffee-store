@@ -1,3 +1,5 @@
+import {ProductDetail} from './product-detail.model';
+
 export class Product {
   public productId: string;
   public productName: string;
@@ -5,4 +7,5 @@ export class Product {
   public productDescription: string;
   public productPrice: number;
   public productStatus: boolean;
+  public productDetail: ProductDetail[];
 }
