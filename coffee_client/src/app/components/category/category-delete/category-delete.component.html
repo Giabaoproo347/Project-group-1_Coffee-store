@@ -1,1 +1,12 @@
-<p>category-delete works!</p>
+<a routerLink="/category/category-list">Back to home</a>
+<h3>Edit Category</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="deleteForm">
+  <input type="hidden" formControlName="categoryId">
+  <p>First name</p>
+  <input type="text" placeholder="Name" formControlName="categoryName">
+  <p>Last name</p>
+  <input type="text" placeholder="Status" formControlName="categoryStatus">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

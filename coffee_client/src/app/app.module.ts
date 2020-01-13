@@ -56,6 +56,8 @@ import { PromotionAddComponent } from './components/promotion/promotion-add/prom
 import { PromotionEditComponent } from './components/promotion/promotion-edit/promotion-edit.component';
 import { PromotionDeleteComponent } from './components/promotion/promotion-delete/promotion-delete.component';
 import { PromotionListComponent } from './components/promotion/promotion-list/promotion-list.component';
+import { MemberDetailComponent } from './components/member/member-detail/member-detail.component';
+import { PaymentDetailComponent } from './components/payment/payment-detail/payment-detail.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { PromotionListComponent } from './components/promotion/promotion-list/pr
     PromotionAddComponent,
     PromotionEditComponent,
     PromotionDeleteComponent,
-    PromotionListComponent
+    PromotionListComponent,
+    MemberDetailComponent,
+    PaymentDetailComponent
   ],
   imports: [
     BrowserModule,

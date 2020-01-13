@@ -10,40 +10,17 @@ import {Router} from '@angular/router';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
-  categories: Observable<Category[]>;
+  listCategory: Category[];
 
-  constructor(private categoryService: CategoryService,
-              private router: Router) {
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit() {
-    this.reloadData();
+    this.categoryService.getCategories().subscribe(next => (this.listCategory = next), error => (this.listCategory = []));
   }
-
-  reloadData() {
-    this.categories = this.categoryService.getCategories();
-  }
-
-  deleteCategory(id: number) {
-    this.categoryService.deleteCategory(id).subscribe(
-      data => {
-        console.log(data);
-        // this.reloadData();
-      }, error => console.log(error));
-  }
-
-  submitDelete(id: number) {
-    if (confirm('Bạn có thực sự muốn xóa?') === true) {
-      this.deleteCategory(id);
-      this.reloadData();
-    }
-  }
-
-  categoryDetail(id: number) {
-    this.router.navigate(['category-detail', id]);
-  }
-
-  updateCategory(id: number) {
-    this.router.navigate(['edit-category', id]);
+  delete(category: Category) {
+    this.categoryService.deleteCategory(category).subscribe(data => {
+      this.listCategory = this.listCategory.filter(p => p !== category)
+    });
   }
 }

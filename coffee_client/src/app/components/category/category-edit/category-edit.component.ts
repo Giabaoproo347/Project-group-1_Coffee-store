@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Category} from '../../../models/category.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../../services/category.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-category-edit',
@@ -9,37 +10,40 @@ import {CategoryService} from '../../../services/category.service';
   styleUrls: ['./category-edit.component.css']
 })
 export class CategoryEditComponent implements OnInit {
-  id: number;
+  editForm: FormGroup;
   category: Category;
-  submitted: false;
 
-  constructor(private router: Router,
+  constructor(private fb: FormBuilder,
+              private categoryService: CategoryService,
               private route: ActivatedRoute,
-              private categoryService: CategoryService) {
+              private router: Router
+  ) {
   }
 
   ngOnInit() {
-    this.category = new Category();
-    this.id = this.route.snapshot.params['categoryId'];
-    this.categoryService.getCategoryId(this.id).subscribe(data => {
-      console.log(data);
-      this.category = data;
-    }, error => console.log(error));
+    this.editForm = this.fb.group({
+      categoryId: [''],
+      categoryName: [''],
+      categoryStatus: ['']
+    });
+    const id = this.route.snapshot.paramMap.get('id');
+    this.categoryService.getCategoryId(id).subscribe(next => {
+        this.category = next;
+        this.editForm.patchValue(this.category);
+      },
+      error => {
+        console.log(error);
+        this.category = null;
+      }
+    );
   }
 
-  updateCategory() {
-    this.categoryService.updateCategory(this.category).subscribe(data => {
-      console.log(data);
-    }, error => console.log(error));
-    this.category = new Category();
-    this.gotoList();
-  }
-
-  gotoList() {
-    this.router.navigate(['categories']);
-  }
-
-  onSubmit() {
-    this.updateCategory();
+  onsubmit() {
+    const {value} = this.editForm;
+    console.log(value);
+    this.categoryService.updateCategory(value).subscribe(next => {
+      confirm('sua thanh cong');
+      this.router.navigate(['category/category-list']);
+    });
   }
 }

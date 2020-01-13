@@ -16,7 +16,7 @@ export class PaymentService {
     return this.http.get<Payment[]>(this.PAYMENT_URL);
   }
 
-  getPaymentById(id: number): Observable<Payment> {
+  getPaymentById(id: string): Observable<Payment> {
     return this.http.get<Payment>(`${this.PAYMENT_URL}/${id}`);
   }
 
@@ -24,7 +24,7 @@ export class PaymentService {
     return this.http.post<Payment>(`${this.PAYMENT_URL}`, payment);
   }
 
-  deletePayment(id: number): Observable<any> {
+  deletePayment(id: string): Observable<any> {
     return this.http.delete(`${this.PAYMENT_URL}/${id}`);
   }
 

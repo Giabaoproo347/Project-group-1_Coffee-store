@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 public class MemberController {
     @Autowired
     private MemberService memberService;

@@ -1,36 +1,20 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h2>Category List</h2>
-  </div>
-
-  <div class="panel-body">
-    <table class="table table-striped table-bordered">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let category of categories | async">
-        <td>{{category.categoryId}}</td>
-        <td>{{category.categoryName}}</td>
-        <td>{{category.categoriesStatus}}</td>
-        <td>
-          <button (click)="updateCategory(category.categoryId)" class="btn btn-primary">
-            Update
-          </button>
-          <button (click)="submitDelete(category.categoryId)" class="btn btn-danger">
-            Delete
-          </button>
-          <button (click)="categoryDetail(category.categoryId)" class="btn btn-info" style="margin-left: 10px">
-            View
-          </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<button routerLink="/category/category-add" class="btn btn-primary">Create new customer</button>
+<table class="table table-striped, form-group col-md-6" >
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Name</th>
+  <th scope="row">Status</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let category of listCategory, index as i">
+    <td>{{i+1}}</td>
+    <td>{{category.categoryName}}</td>
+    <td>{{category.categoriesStatus}}</td>
+    <div>
+      <td><button [routerLink]="['/category/category-edit',category.categoryId]" class="btn btn-primary">Edit</button></td>
+      <td><button (click)="delete(category)" class="btn btn-danger mb-2">Delete</button></td>
+    </div>
+  </tr>
+  </tbody>
+</table>

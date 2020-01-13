@@ -8,26 +8,34 @@ import {ProductDetailComponent} from './components/product/product-detail/produc
 import {CategoryAddComponent} from './components/category/category-add/category-add.component';
 import {CategoryEditComponent} from './components/category/category-edit/category-edit.component';
 import {CategoryListComponent} from './components/category/category-list/category-list.component';
+import {MemberAddComponent} from './components/member/member-add/member-add.component';
+import {MemberEditComponent} from './components/member/member-edit/member-edit.component';
+import {MemberListComponent} from './components/member/member-list/member-list.component';
+import {MemberDetailComponent} from './components/member/member-detail/member-detail.component';
+import {CategoryDeleteComponent} from './components/category/category-delete/category-delete.component';
+import {PaymentAddComponent} from './components/payment/payment-add/payment-add.component';
+import {PaymentEditComponent} from './components/payment/payment-edit/payment-edit.component';
+import {PaymentListComponent} from './components/payment/payment-list/payment-list.component';
 
 const routes: Routes = [{
   path: 'home',
   component: HomepageComponent
 },
   {
-    path: 'add-category',
+    path: 'category/category-add',
     component: CategoryAddComponent
   },
   {
-    path: 'edit-category',
+    path: 'category/category-edit/:id',
     component: CategoryEditComponent
   },
   {
-    path: 'category-list',
+    path: 'category/category-list',
     component: CategoryListComponent
   },
   {
-    path: 'category-detail/:id',
-    component: ProductDetailComponent
+    path: 'category/category-delete/:id',
+    component: CategoryDeleteComponent
   }
 ];
 

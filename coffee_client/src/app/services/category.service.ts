@@ -12,39 +12,23 @@ export class CategoryService {
   constructor(private http: HttpClient) {
   }
 
-  private data;
-
-  setData(data) {
-    this.data = data;
-  }
-
-  getData() {
-    const tmp = this.data;
-    this.clearData();
-    return tmp;
-  }
-
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.CATEGORY_URL);
   }
 
-  getCategoryId(id: number): Observable<Category> {
+  getCategoryId(id: string): Observable<Category> {
     return this.http.get<Category>(`${this.CATEGORY_URL}/${id}`);
   }
 
-  createCategory(category: Partial<Category>) {
+  createCategory(category: Partial<Category>): Observable<Category>  {
     return this.http.post<Category>(`${this.CATEGORY_URL}`, category);
   }
 
-  deleteCategory(id: number): Observable<any> {
-    return this.http.delete(`${this.CATEGORY_URL}/${id}`);
+  deleteCategory(category: Category): Observable<any> {
+    return this.http.delete(`${this.CATEGORY_URL}/${category.categoryId}`);
   }
 
-  updateCategory(category: Category): Observable<Category> {
-    return this.http.patch<Category>(`${this.CATEGORY_URL}/${category.categoryId}`, category);
-  }
-
-  private clearData() {
-    this.data = undefined;
+  updateCategory(category: Category): Observable<any> {
+    return this.http.put(`${this.CATEGORY_URL}/${category.categoryId}`, category);
   }
 }

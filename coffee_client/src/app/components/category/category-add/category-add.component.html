@@ -1,16 +1,11 @@
+<a routerLink="/category/category-list">Back to home</a>
 <h3>Create Category</h3>
-<div [hidden]="submited" style="width: 400px">
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" class="form-control" name="categoryName" required [(ngModel)]="category.categoryName"
-             name="categoryName">
-    </div>
-
-  <div class="form-group">
-    <label>Status</label>
-    <input type="text" class="form-control" name="categoryStatus" [(ngModel)]="category.categoriesStatus" >
-  </div>
-    <button type="submit" (click)="onSubmit()">Add</button>
-  </form>
-</div>
+<form (ngSubmit)="onsubmit()" [formGroup]="createForm">
+  <p>Name</p>
+  <input type="text" placeholder="first name" formControlName="categoryName">
+  <p>Status</p>
+  <input type="text" placeholder="last name" formControlName="categoryStatus">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

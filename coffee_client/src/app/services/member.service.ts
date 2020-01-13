@@ -14,19 +14,19 @@ export class MemberService {
     return this.http.get<Member[]>(this.MEMBER_URL);
   }
 
-  getMemberById(id: number): Observable<Member> {
+  getMemberById(id: string): Observable<Member> {
     return this.http.get<Member>(`${this.MEMBER_URL}/${id}`);
   }
 
-  createMember(member: Partial<Member>): Observable<Member> {
-    return this.http.post<Member>(`${this.MEMBER_URL}`, member);
+  createMember(member: Member): Observable<any> {
+    return this.http.post(`${this.MEMBER_URL}`, member);
   }
 
-  deleteMember(id: number): Observable<any> {
+  deleteMember(id: string): Observable<any> {
     return this.http.delete(`${this.MEMBER_URL}/${id}`);
   }
 
-  updatMember(member: Member): Observable<Member> {
-    return this.http.patch<Member>(`${this.MEMBER_URL}/${member.memberId}`, member);
+  updatMember(member: Member): Observable<any> {
+    return this.http.put(`${this.MEMBER_URL}/${member.memberId}`, member);
   }
 }
