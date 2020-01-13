@@ -1,5 +1,6 @@
 package com.project.coffee.controller;
 
+import com.project.coffee.model.Order;
 import com.project.coffee.model.OrderDetails;
 import com.project.coffee.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
@@ -57,5 +59,17 @@ public class OrderDetailController {
 
         orderDetailService.save(currentOrderDetails);
         return new ResponseEntity<OrderDetails>(currentOrderDetails, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/orderDetails/{id}")
+    public ResponseEntity<OrderDetails> deleteOrders(@PathVariable("id") String id) {
+
+        OrderDetails orderDetails = orderDetailService.findById(id);
+        if (orderDetails == null) {
+            return new ResponseEntity<OrderDetails>(HttpStatus.NOT_FOUND);
+        }
+
+        orderDetailService.remove(id);
+        return new ResponseEntity<OrderDetails>(HttpStatus.NO_CONTENT);
     }
 }

@@ -1,5 +1,6 @@
 package com.project.coffee.controller;
 
+import com.project.coffee.model.OrderDetails;
 import com.project.coffee.model.Payments;
 import com.project.coffee.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class PaymentController {
         if (payments.isEmpty()) {
             return new ResponseEntity<List<Payments>>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Payments>>(HttpStatus.OK);
+        return new ResponseEntity<List<Payments>>(payments, HttpStatus.OK);
     }
 
     @GetMapping("/payments/{id}")
@@ -57,5 +58,17 @@ public class PaymentController {
 
         paymentService.save(currentPayment);
         return new ResponseEntity<Payments>(currentPayment, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/payments/{id}")
+    public ResponseEntity<Payments> deleteOrders(@PathVariable("id") String id) {
+
+        Payments payments = paymentService.findById(id);
+        if (payments == null) {
+            return new ResponseEntity<Payments>(HttpStatus.NOT_FOUND);
+        }
+
+        paymentService.remove(id);
+        return new ResponseEntity<Payments>(HttpStatus.NO_CONTENT);
     }
 }

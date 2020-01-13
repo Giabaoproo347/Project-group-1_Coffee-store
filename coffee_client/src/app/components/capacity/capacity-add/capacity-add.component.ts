@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {CategoryService} from '../../../services/category.service';
 import {Router} from '@angular/router';
 import {CapacityService} from '../../../services/capacity.service';
+import {Capacity} from '../../../models/capacity.model';
 
 @Component({
   selector: 'app-capacity-add',

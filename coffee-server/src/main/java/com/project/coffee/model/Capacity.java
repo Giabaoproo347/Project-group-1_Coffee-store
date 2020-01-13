@@ -19,7 +19,7 @@ public class Capacity {
             })
     @GeneratedValue(generator = "id_gen")
     private String capacityId;
-    private String capacityname;
+    private String capacityName;
     private Long capacityValue;
 
     public Set<ProductDetails> getProductDetails() {
@@ -41,12 +41,12 @@ public class Capacity {
         this.capacityId = capacityId;
     }
 
-    public String getCapacityname() {
-        return capacityname;
+    public String getCapacityName() {
+        return capacityName;
     }
 
-    public void setCapacityname(String capacityname) {
-        this.capacityname = capacityname;
+    public void setCapacityName(String capacityname) {
+        this.capacityName = capacityname;
     }
 
     public Long getCapacityValue() {

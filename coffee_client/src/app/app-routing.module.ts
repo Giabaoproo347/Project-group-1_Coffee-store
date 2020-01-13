@@ -33,6 +33,9 @@ import {ProductDetailDeleteComponent} from './components/product-detail/product-
 import {ProductDetailListComponent} from './components/product-detail/product-detail-list/product-detail-list.component';
 import {ProductDetailEditComponent} from './components/product-detail/product-detail-edit/product-detail-edit.component';
 import {ProductDetailAddComponent} from './components/product-detail/product-detail-add/product-detail-add.component';
+import {ProductAddComponent} from './components/product/product-add/product-add.component';
+import {ProductEditComponent} from './components/product/product-edit/product-edit.component';
+import {ProductListComponent} from './components/product/product-list/product-list.component';
 
 const routes: Routes = [{
   path: 'home',
@@ -173,8 +176,25 @@ const routes: Routes = [{
   {
     path: 'productDetail/productDetail-delete/:id',
     component: ProductDetailDeleteComponent
-  }
+  },
 
+
+  {
+    path: 'product/product-add',
+    component: ProductAddComponent
+  },
+  {
+    path: 'product/product-edit/:id',
+    component: ProductEditComponent
+  },
+  {
+    path: 'product/product-list',
+    component: ProductListComponent
+  },
+  {
+    path: 'product/product-delete/:id',
+    component: ProductDetailDeleteComponent
+  }
 ];
 
 

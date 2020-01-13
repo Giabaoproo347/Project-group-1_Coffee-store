@@ -3,7 +3,7 @@
   <thead class="thead-light">
   <th scope="row">ID</th>
   <th scope="row">Price</th>
-  <th scope="row">Entry Price</th>
+  <th scope="row">Enty Price</th>
   <th scope="row">Quantity</th>
   <th colspan="2">Option</th>
   </thead>
@@ -15,9 +15,7 @@
     <td>{{productDetail.quantity}}</td>
     <div>
       <td>
-        <button [routerLink]="['/productDetail/productDetail-edit',productDetail.productDetailId]"
-                class="btn btn-primary">Edit
-        </button>
+        <button [routerLink]="['/productDetail/productDetail-edit',productDetail.productDetailId]" class="btn btn-primary">Edit</button>
       </td>
       <td>
         <button (click)="delete(productDetail)" class="btn btn-danger mb-2">Delete</button>

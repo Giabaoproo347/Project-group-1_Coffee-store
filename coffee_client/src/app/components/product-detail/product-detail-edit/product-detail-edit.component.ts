@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Order} from '../../../models/order.model';
-import {OrderService} from '../../../services/order.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDetail} from '../../../models/product-detail.model';
 import {ProductDetailService} from '../../../services/product-detail.service';
@@ -50,5 +48,6 @@ export class ProductDetailEditComponent implements OnInit {
       this.router.navigate(['productDetail/productDetail-list']);
     });
   }
+
 
 }

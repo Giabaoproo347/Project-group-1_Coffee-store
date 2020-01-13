@@ -1,6 +1,8 @@
 package com.project.coffee.controller;
 
+import com.project.coffee.model.Product;
 import com.project.coffee.model.ProductDetails;
+import com.project.coffee.model.Promotion;
 import com.project.coffee.service.ProductDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -9,64 +11,60 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.persistence.Entity;
 import java.util.List;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 public class ProductDetailsController {
     @Autowired
     ProductDetailsService productDetailsService;
-    @RequestMapping(value = "/product-details", method = RequestMethod.GET)
-    public ResponseEntity<List<ProductDetails>> showProductdetails(){
-        List<ProductDetails> productDetails = (List<ProductDetails>) productDetailsService.findAll();
-        if(productDetails.isEmpty()){
+    @GetMapping("/product-details")
+    public ResponseEntity<List<ProductDetails>> listProductDetail() {
+        List<ProductDetails> productDetails =(List<ProductDetails>) productDetailsService.findAll();
+        if (productDetails.isEmpty()) {
             return new ResponseEntity<List<ProductDetails>>(HttpStatus.NO_CONTENT);
-        }else{
-            return new ResponseEntity<List<ProductDetails>>(productDetails, HttpStatus.OK);
         }
+        return new ResponseEntity<List<ProductDetails>>(productDetails, HttpStatus.OK);
     }
 
-    @RequestMapping(value ="/product-details/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ProductDetails> getProductdetail(@PathVariable ("id") String id){
+    @GetMapping("/product-details/{id}")
+    public ResponseEntity<ProductDetails> getProductDetail(@PathVariable("id") String id) {
         ProductDetails productDetails = productDetailsService.findById(id);
-        if(productDetails == null){
-            System.out.println(" khong cos phan tu can lay");
-            return new ResponseEntity<ProductDetails>( HttpStatus.NOT_FOUND);
-        }else{
-            return new ResponseEntity<ProductDetails>(productDetails, HttpStatus.OK);
+        if (productDetails == null) {
+            return new ResponseEntity<ProductDetails>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<ProductDetails>(productDetails, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/product-details", method = RequestMethod.POST)
-    public ResponseEntity<Void> createPromotion(@RequestBody ProductDetails productDetails, UriComponentsBuilder ucBuilder) {
+    @PostMapping("/product-details")
+    public ResponseEntity<Void> createProductDetail(@RequestBody ProductDetails productDetails, UriComponentsBuilder ucBuilder) {
         productDetailsService.save(productDetails);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/promotion/{id}").buildAndExpand(productDetails.getProductDetailId()).toUri());
+        headers.setLocation(ucBuilder.path("/product-details/{id}").buildAndExpand(productDetails.getProductDetailId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
 
-    @RequestMapping(value = "/product-detail/{id}", method = RequestMethod.PUT)
+    @PutMapping("/product-details/{id}")
     public ResponseEntity<ProductDetails> updateProductDetail(@PathVariable("id") String id, @RequestBody ProductDetails productDetails) {
 
-        ProductDetails _productDetails = productDetailsService.findById(id);
+        ProductDetails currentProductDetail = productDetailsService.findById(id);
 
-        if (_productDetails == null) {
+        if (currentProductDetail == null) {
             return new ResponseEntity<ProductDetails>(HttpStatus.NOT_FOUND);
         }
 
-        _productDetails.setProductDetailId(productDetails.getProductDetailId());
-        _productDetails.setEntryPrice(productDetails.getEntryPrice());
-        _productDetails.setPrice(productDetails.getPrice());
-        _productDetails.setQuantity(productDetails.getQuantity());
+        currentProductDetail.setProductDetailId(productDetails.getProductDetailId());
+        currentProductDetail.setPrice(productDetails.getPrice());
+        currentProductDetail.setEntryPrice(productDetails.getEntryPrice());
+        currentProductDetail.setQuantity(productDetails.getQuantity());
 
-        productDetailsService.save(_productDetails);
-        return new ResponseEntity<ProductDetails>(_productDetails, HttpStatus.OK);
+        productDetailsService.save(currentProductDetail);
+        return new ResponseEntity<ProductDetails>(currentProductDetail, HttpStatus.OK);
     }
 
-
-    @DeleteMapping("/product-detail/{id}")
-    public ResponseEntity<ProductDetails> deleteProductdDetail(@PathVariable("id") String id) {
+    @DeleteMapping("/product-details/{id}")
+    public ResponseEntity<ProductDetails> deleteProductDetail(@PathVariable("id") String id) {
 
         ProductDetails productDetails = productDetailsService.findById(id);
         if (productDetails == null) {
@@ -76,8 +74,4 @@ public class ProductDetailsController {
         productDetailsService.remove(id);
         return new ResponseEntity<ProductDetails>(HttpStatus.NO_CONTENT);
     }
-
-
-
-
 }

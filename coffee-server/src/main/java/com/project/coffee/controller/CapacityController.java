@@ -24,7 +24,7 @@ public class CapacityController {
         if(capacities.isEmpty()){
             return new ResponseEntity<List<Capacity>>(HttpStatus.NOT_FOUND);
         }else{
-            return new ResponseEntity<List<Capacity>>(HttpStatus.OK);
+            return new ResponseEntity<List<Capacity>>(capacities, HttpStatus.OK);
         }
     }
 
@@ -53,7 +53,7 @@ public class CapacityController {
             return new ResponseEntity<Capacity>(HttpStatus.NOT_FOUND);
         }else{
             capacity1.setCapacityId(capacity.getCapacityId());
-            capacity1.setCapacityname(capacity.getCapacityname());
+            capacity1.setCapacityName(capacity.getCapacityName());
             capacity1.setCapacityValue(capacity.getCapacityValue());
             return new ResponseEntity<Capacity>(capacity1, HttpStatus.OK);
         }

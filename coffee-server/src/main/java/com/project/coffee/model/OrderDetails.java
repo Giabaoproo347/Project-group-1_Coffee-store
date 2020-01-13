@@ -20,7 +20,7 @@ public class OrderDetails {
     @GeneratedValue(generator = "id_gen")
     private String orderDetailId;
     private Double salePrice;
-    private Long Quantity;
+    private Long quantity;
     private Double totalPay;
 
     @OneToMany (targetEntity = ProductDetails.class)
@@ -63,15 +63,15 @@ public class OrderDetails {
     }
 
     public Long getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(Long quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
     public Double getTotalPay() {
-        return totalPay;
+        return this.salePrice * this.quantity;
     }
 
     public void setTotalPay(Double totalPay) {

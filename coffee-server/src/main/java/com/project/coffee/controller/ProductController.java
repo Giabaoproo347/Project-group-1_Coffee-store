@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 public class ProductController {
     @Autowired
     private ProductService productService;

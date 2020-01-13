@@ -1,1 +1,16 @@
-<p>product-edit works!</p>
+<a routerLink="/product/product-list">Back to home</a>
+<h3>Edit Order</h3>
+<form (ngSubmit)="onsubmit()" [formGroup]="editForm">
+  <input type="hidden" formControlName="productId">
+  <p>Name</p>
+  <input type="text" placeholder="name" formControlName="productName">
+  <p>Image</p>
+  <input type="text" placeholder="image" formControlName="productImage">
+  <p>Description</p>
+  <input type="text" placeholder="Description" formControlName="productDescription">
+  <p>Status</p>
+  <input type="text" placeholder="stauts" formControlName="productStatus">
+  <br>
+  <br>
+  <button type="submit">Submit</button>
+</form>

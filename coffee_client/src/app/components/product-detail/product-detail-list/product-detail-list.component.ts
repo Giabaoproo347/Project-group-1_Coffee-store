@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Order} from '../../../models/order.model';
-import {OrderService} from '../../../services/order.service';
+import {Payment} from '../../../models/payment.model';
+import {PaymentService} from '../../../services/payment.service';
 import {ProductDetail} from '../../../models/product-detail.model';
 import {ProductDetailService} from '../../../services/product-detail.service';
 
@@ -27,4 +27,5 @@ export class ProductDetailListComponent implements OnInit {
       this.listProductDetails = this.listProductDetails.filter(p => p !== productDetail);
     });
   }
+
 }

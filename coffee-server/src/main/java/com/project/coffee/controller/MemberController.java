@@ -1,6 +1,7 @@
 package com.project.coffee.controller;
 
 import com.project.coffee.model.Members;
+import com.project.coffee.model.Order;
 import com.project.coffee.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,7 @@ public class MemberController {
         if (members.isEmpty()) {
             return new ResponseEntity<List<Members>>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Members>>(HttpStatus.OK);
+        return new ResponseEntity<List<Members>>(members, HttpStatus.OK);
     }
 
     @GetMapping("/members/{id}")
@@ -63,5 +64,16 @@ public class MemberController {
 
         memberService.save(currentMember);
         return new ResponseEntity<Members>(currentMember, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/members/{id}")
+    public ResponseEntity<Members> deleteMembers(@PathVariable("id") String id) {
+        Members members = memberService.findById(id);
+        if (members == null) {
+            return new ResponseEntity<Members>(HttpStatus.NOT_FOUND);
+        }
+
+        memberService.remove(id);
+        return new ResponseEntity<Members>(HttpStatus.NO_CONTENT);
     }
 }

@@ -1,1 +1,28 @@
-<p>product-list works!</p>
+<button routerLink="/product/product-add" class="btn btn-primary">Create new peoduct</button>
+<table class="table table-striped, form-group col-md-6">
+  <thead class="thead-light">
+  <th scope="row">ID</th>
+  <th scope="row">Name</th>
+  <th scope="row">Image</th>
+  <th scope="row">Description</th>
+  <th scope="row">Status</th>
+  <th colspan="2">Option</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of listProducts, index as i">
+    <td>{{product.productId}}</td>
+    <td>{{product.productName}}</td>
+    <td>{{product.productImage}}</td>
+    <td>{{product.productDescription}}</td>
+    <td>{{product.productStatus}}</td>
+    <div>
+      <td>
+        <button [routerLink]="['/product/product-edit',product.productId]" class="btn btn-primary">Edit</button>
+      </td>
+      <td>
+        <button (click)="delete(product)" class="btn btn-danger mb-2">Delete</button>
+      </td>
+    </div>
+  </tr>
+  </tbody>
+</table>

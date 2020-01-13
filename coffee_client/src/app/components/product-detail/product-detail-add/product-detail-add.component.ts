@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {OrderService} from '../../../services/order.service';
+import {PaymentService} from '../../../services/payment.service';
 import {Router} from '@angular/router';
 import {ProductDetailService} from '../../../services/product-detail.service';
-import {Order} from '../../../models/order.model';
 
 @Component({
   selector: 'app-product-detail-add',
@@ -11,6 +10,7 @@ import {Order} from '../../../models/order.model';
   styleUrls: ['./product-detail-add.component.css']
 })
 export class ProductDetailAddComponent implements OnInit {
+
   private createForm: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -33,10 +33,10 @@ export class ProductDetailAddComponent implements OnInit {
           price: [''],
           entryPrice: [''],
           quantity: ['']
-
         });
       }
     );
     this.router.navigate(['productDetail/productDetail-list']);
   }
+
 }
