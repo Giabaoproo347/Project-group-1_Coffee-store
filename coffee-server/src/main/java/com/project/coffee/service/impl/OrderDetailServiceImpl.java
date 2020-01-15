@@ -5,6 +5,8 @@ import com.project.coffee.repository.OrderDetailRepository;
 import com.project.coffee.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class OrderDetailServiceImpl implements OrderDetailService {
     @Autowired
     private OrderDetailRepository orderDetailRepository;
@@ -14,9 +16,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public OrderDetails findById(String id) {
-        return orderDetailRepository.findById(id).orElse(null);
+    public Optional<OrderDetails> findById(String id) {
+        return orderDetailRepository.findById(id);
     }
+
 
     @Override
     public void save(OrderDetails orderDetails) {

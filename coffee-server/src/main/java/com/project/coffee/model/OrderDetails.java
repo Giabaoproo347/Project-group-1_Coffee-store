@@ -30,6 +30,17 @@ public class OrderDetails {
     @JoinColumn (name = "orderId")
     private Order order;
 
+    public OrderDetails() {
+    }
+
+    public OrderDetails(String orderDetailId, Double salePrice, Long quantity, Double totalPay, Order order) {
+        this.orderDetailId = orderDetailId;
+        this.salePrice = salePrice;
+        this.quantity = quantity;
+        this.totalPay = totalPay;
+        this.order = order;
+    }
+
     public Order getOrder() {
         return order;
     }

@@ -29,6 +29,18 @@ public class Payments {
     @OneToMany (targetEntity = Order.class)
     private Set<Order> orders;
 
+    public Payments() {
+    }
+
+    public Payments(String paymentId, String paymentName, LocalDate paymentDate, Set<Order> orders) {
+        this.paymentId = paymentId;
+        this.paymentName = paymentName;
+        this.paymentDate = paymentDate;
+        this.orders = orders;
+    }
+
+
+
     public Set<Order> getOrders() {
         return orders;
     }

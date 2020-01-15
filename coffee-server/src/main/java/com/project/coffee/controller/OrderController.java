@@ -1,5 +1,6 @@
 package com.project.coffee.controller;
 
+import com.project.coffee.model.Members;
 import com.project.coffee.model.Order;
 import com.project.coffee.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,71 +10,71 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api/order")
 public class OrderController {
     @Autowired
     private OrderService orderService;
-    @GetMapping("/orders")
-    public ResponseEntity<List<Order>> listAllOrders(){
-        List<Order> orders = (List<Order>) orderService.findAll();
-        if(orders.isEmpty()){
-            return new ResponseEntity<List<Order>>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<List<Order>>(orders, HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<Iterable<Order>> showListOrders() {
+        Iterable<Order> orders = orderService.findAll();
+        return new ResponseEntity<Iterable<Order>>(orders, HttpStatus.OK);
     }
 
-    @GetMapping("/orders/{id}")
-    public ResponseEntity<Order> getCategories(@PathVariable("id") String id) {
-        System.out.println("Fetching Order with id " + id);
-        Order order = orderService.findById(id);
-        if (order == null) {
-            System.out.println("Order with id " + id + " not found");
-            return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
+    @PostMapping("")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity addNewOrder(@Valid @RequestBody Order order) {
+        try {
+            orderService.save(order);
+            return new ResponseEntity(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Order>(order, HttpStatus.OK);
     }
 
-    @PostMapping("/orders")
-    public ResponseEntity<Void> createOrder(@RequestBody Order orders, UriComponentsBuilder ucBuilder) {
-        orderService.save(orders);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/orders/{id}").buildAndExpand(orders.getOrderId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable String id) {
+        Optional<Order> order = orderService.findById(id);
+        if (order.isPresent()) {
+            System.out.println("find Order");
+            return new ResponseEntity<Order>(order.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/orders/{id}")
-    public ResponseEntity<Order> updateCustomer(@PathVariable("id") String id, @RequestBody Order order) {
-        System.out.println("Updating order " + id);
+    @PutMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Order> updateOrder(@PathVariable String id, @RequestBody Order order) {
+        Optional<Order> currentOrder = orderService.findById(id);
+        if (currentOrder.isPresent()) {
+            currentOrder.get().setOrderId(id);
+            currentOrder.get().setPurchaseDate(order.getPurchaseDate());
+            currentOrder.get().setDeliveryDate(order.getDeliveryDate());
+            currentOrder.get().setOrderDescription(order.getOrderDescription());
+            currentOrder.get().setMembers(order.getMembers());
+            currentOrder.get().setPayments(order.getPayments());
+            currentOrder.get().setOrderDetails(order.getOrderDetails());
 
-        Order currentOrder = orderService.findById(id);
-
-        if (currentOrder == null) {
-            System.out.println("Order with id " + id + " not found");
-            return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
+            orderService.save(currentOrder.get());
+            return new ResponseEntity<Order>(currentOrder.get(), HttpStatus.OK);
         }
+        return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
 
-        currentOrder.setPurchaseDate(order.getPurchaseDate());
-        currentOrder.setDeliveryDate(order.getDeliveryDate());
-        currentOrder.setOrderDescription(order.getOrderDescription());
-
-        orderService.save(currentOrder);
-        return new ResponseEntity<Order>(currentOrder, HttpStatus.OK);
     }
 
-    @DeleteMapping("/orders/{id}")
-    public ResponseEntity<Order> deleteOrders(@PathVariable("id") String id) {
-        System.out.println("Fetching & Deleting Order with id " + id);
-
-        Order order = orderService.findById(id);
-        if (order == null) {
-            System.out.println("Unable to delete. Order with id " + id + " not found");
-            return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
+    @DeleteMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Order> deleteOrder(@PathVariable String id) {
+        Optional<Order> order = orderService.findById(id);
+        if (order.isPresent()) {
+            orderService.remove(id);
+            return new ResponseEntity<Order>(HttpStatus.OK);
         }
-
-        orderService.remove(id);
-        return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
     }
 }

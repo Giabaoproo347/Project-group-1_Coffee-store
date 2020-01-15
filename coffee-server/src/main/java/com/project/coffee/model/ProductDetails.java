@@ -34,6 +34,18 @@ public class ProductDetails {
     @JoinColumn (name = "orderDetailId")
     private OrderDetails orderDetails;
 
+    public ProductDetails() {
+    }
+
+    public ProductDetails(String productDetailId, Long price, Long entryPrice, Long quantity, Capacity capacity, OrderDetails orderDetails) {
+        this.productDetailId = productDetailId;
+        this.price = price;
+        this.entryPrice = entryPrice;
+        this.quantity = quantity;
+        this.capacity = capacity;
+        this.orderDetails =orderDetails;
+    }
+
     public Capacity getCapacity() {
         return capacity;
     }

@@ -5,6 +5,8 @@ import com.project.coffee.repository.MemberRepository;
 import com.project.coffee.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberRepository memberRepository;
@@ -15,9 +17,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Members findById(String id) {
-        return memberRepository.findById(id).orElse(null);
+    public Optional<Members> findById(String id) {
+        return memberRepository.findById(id);
     }
+
 
     @Override
     public void save(Members members) {

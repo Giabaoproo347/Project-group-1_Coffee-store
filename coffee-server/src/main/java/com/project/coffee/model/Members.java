@@ -35,6 +35,22 @@ public class Members {
     @OneToMany (targetEntity = Order.class)
     private Set<Order> orders;
 
+    public Members() {
+    }
+
+    public Members(String memberId, String email, String password, String memberName, LocalDate memberDOB, boolean gender, String memberPhone, String memberAddress, boolean memberStatus, Set<Order> orders) {
+        this.memberId = memberId;
+        this.email = email;
+        this.password = password;
+        this.memberName = memberName;
+        this.memberDOB = memberDOB;
+        this.gender = gender;
+        this.memberPhone = memberPhone;
+        this.memberAddress = memberAddress;
+        this.memberStatus = memberStatus;
+        this.orders = orders;
+    }
+
     public Set<Order> getOrders() {
         return orders;
     }

@@ -27,6 +27,17 @@ public class Promotion {
     @OneToMany (targetEntity = Product.class)
     private Set<Product> products;
 
+    public Promotion() {
+    }
+
+    public Promotion(String promotionId, String promotionName, Double promotionPrice, boolean promotionStatus, Set<Product> products) {
+        this.promotionId = promotionId;
+        this.promotionName = promotionName;
+        this.promotionPrice = promotionPrice;
+        this.promotionStatus = promotionStatus;
+        this.products = products;
+    }
+
     public boolean isPromotionStatus() {
         return promotionStatus;
     }

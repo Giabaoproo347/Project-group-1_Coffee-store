@@ -5,7 +5,6 @@ import com.project.coffee.config.StringPrefixedSequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -39,6 +38,19 @@ public class Order {
     @ManyToOne
     @JoinColumn (name = "memberId")
     private Members  members;
+
+    public Order() {
+    }
+
+    public Order(String orderId, LocalDate purchaseDate, LocalDate deliveryDate, String orderDescription, Set<OrderDetails> orderDetails, Payments payments, Members members) {
+        this.orderId = orderId;
+        this.purchaseDate = purchaseDate;
+        this.deliveryDate = deliveryDate;
+        this.orderDescription = orderDescription;
+        this.orderDetails = orderDetails;
+        this.payments = payments;
+        this.members = members;
+    }
 
     public Members getMembers() {
         return members;

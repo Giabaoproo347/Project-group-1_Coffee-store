@@ -5,6 +5,8 @@ import com.project.coffee.repository.CategoriesRepository;
 import com.project.coffee.service.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class CategoriesServiceImpl implements CategoriesService {
     @Autowired
     private CategoriesRepository categoriesRepository;
@@ -14,9 +16,10 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public Categories findById(String id) {
-        return categoriesRepository.findById(id).orElse(null);
+    public Optional<Categories> findById(String id) {
+        return categoriesRepository.findById(id);
     }
+
 
     @Override
     public void save(Categories categories) {

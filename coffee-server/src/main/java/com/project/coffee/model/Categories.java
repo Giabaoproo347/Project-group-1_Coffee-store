@@ -22,8 +22,18 @@ public class Categories {
     private String categoryName;
     private boolean categoryStatus;
 
-    @OneToMany(targetEntity = Product.class)
+    @OneToMany(targetEntity = Product.class, fetch = FetchType.EAGER)
     private Set<Product> products;
+
+    public Categories() {
+    }
+
+    public Categories(String categoryId, String categoryName, boolean categoryStatus, Set<Product> products) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.categoryStatus = categoryStatus;
+        this.products = products;
+    }
 
     public boolean isCategoryStatus() {
         return categoryStatus;

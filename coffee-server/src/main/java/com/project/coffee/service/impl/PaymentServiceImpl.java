@@ -5,6 +5,8 @@ import com.project.coffee.repository.PaymentRepository;
 import com.project.coffee.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
@@ -15,8 +17,8 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payments findById(String id) {
-        return paymentRepository.findById(id).orElse(null);
+    public Optional<Payments> findById(String id) {
+        return paymentRepository.findById(id);
     }
 
     @Override

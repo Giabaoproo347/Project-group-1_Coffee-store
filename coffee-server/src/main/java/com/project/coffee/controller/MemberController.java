@@ -1,79 +1,81 @@
 package com.project.coffee.controller;
 
 import com.project.coffee.model.Members;
-import com.project.coffee.model.Order;
 import com.project.coffee.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin( origins = "*", maxAge = 3600)
+@RequestMapping("/api/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/members")
-    public ResponseEntity<List<Members>> listAllMembers() {
-        List<Members> members = (List<Members>) memberService.findAll();
-        if (members.isEmpty()) {
-            return new ResponseEntity<List<Members>>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<List<Members>>(members, HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<Iterable<Members>> showListMembers() {
+        Iterable<Members> members = memberService.findAll();
+        return new ResponseEntity<Iterable<Members>>(members, HttpStatus.OK);
     }
 
-    @GetMapping("/members/{id}")
-    public ResponseEntity<Members> getMember(@PathVariable String id) {
-        Members members = memberService.findById(id);
-        if (members == null) {
-            return new ResponseEntity<Members>(HttpStatus.NOT_FOUND);
+    @PostMapping("")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity addNewMember(@Valid @RequestBody Members members) {
+        try {
+            memberService.save(members);
+            return new ResponseEntity(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Members>(members, HttpStatus.OK);
     }
 
-    @PostMapping("/members")
-    public ResponseEntity<Void> createMember(@RequestBody Members members, UriComponentsBuilder ucBuider) {
-        memberService.save(members);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuider.path("/members{id}").buildAndExpand(members.getMemberId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    public ResponseEntity<Members> getMemberById(@PathVariable String id) {
+        Optional<Members> members = memberService.findById(id);
+        if (members.isPresent()) {
+            System.out.println("find Members");
+            return new ResponseEntity<Members>(members.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/members/{id}")
-    public ResponseEntity<Members> updateMember(@PathVariable String id, @RequestBody Members members) {
-        Members currentMember = memberService.findById(id);
+    @PutMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Members> updateMembers(@PathVariable String id, @RequestBody Members members) {
+        Optional<Members> currentMember = memberService.findById(id);
+        if (currentMember.isPresent()) {
+            currentMember.get().setMemberId(id);
+            currentMember.get().setMemberName(members.getMemberName());
+            currentMember.get().setEmail(members.getEmail());
+            currentMember.get().setPassword(members.getPassword());
+            currentMember.get().setGender(members.isGender());
+            currentMember.get().setMemberDOB(members.getMemberDOB());
+            currentMember.get().setMemberPhone(members.getMemberPhone());
+            currentMember.get().setMemberAddress(members.getMemberAddress());
+            currentMember.get().setMemberStatus(members.isMemberStatus());
+            currentMember.get().setMemberStatus(members.isMemberStatus());
+            currentMember.get().setOrders(members.getOrders());
 
-        if (currentMember == null) {
-            return new ResponseEntity<Members>(HttpStatus.NOT_FOUND);
+            memberService.save(currentMember.get());
+            return new ResponseEntity<Members>(currentMember.get(), HttpStatus.OK);
         }
+        return new ResponseEntity<Members>(HttpStatus.NOT_FOUND);
 
-        currentMember.setMemberId(members.getMemberId());
-        currentMember.setEmail(members.getEmail());
-        currentMember.setGender(members.isGender());
-        currentMember.setMemberAddress(members.getMemberAddress());
-        currentMember.setMemberDOB(members.getMemberDOB());
-        currentMember.setMemberName(members.getMemberName());
-        currentMember.setMemberPhone(members.getMemberPhone());
-        currentMember.setMemberStatus(members.isMemberStatus());
-        currentMember.setPassword(members.getPassword());
-
-        memberService.save(currentMember);
-        return new ResponseEntity<Members>(currentMember, HttpStatus.OK);
     }
 
-    @DeleteMapping("/members/{id}")
-    public ResponseEntity<Members> deleteMembers(@PathVariable("id") String id) {
-        Members members = memberService.findById(id);
-        if (members == null) {
-            return new ResponseEntity<Members>(HttpStatus.NOT_FOUND);
+    @DeleteMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Members> deleteMembers(@PathVariable String id) {
+        Optional<Members> members = memberService.findById(id);
+        if (members.isPresent()) {
+            memberService.remove(id);
+            return new ResponseEntity<Members>(HttpStatus.OK);
         }
-
-        memberService.remove(id);
-        return new ResponseEntity<Members>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Members>(HttpStatus.NOT_FOUND);
     }
 }

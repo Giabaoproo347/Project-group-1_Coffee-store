@@ -6,6 +6,7 @@ import com.project.coffee.service.CapacityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CapacityServiceImpl implements CapacityService {
     @Autowired
@@ -17,9 +18,10 @@ public class CapacityServiceImpl implements CapacityService {
     }
 
     @Override
-    public Capacity findById(String id) {
-        return capacityRepository.findById(id).orElse(null);
+    public Optional<Capacity> findById(String id) {
+        return capacityRepository.findById(id);
     }
+
 
     @Override
     public void save(Capacity capacity) {

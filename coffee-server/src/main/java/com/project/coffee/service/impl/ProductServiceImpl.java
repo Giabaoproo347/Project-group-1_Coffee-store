@@ -5,6 +5,8 @@ import com.project.coffee.repository.ProductRepository;
 import com.project.coffee.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
@@ -15,9 +17,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findById(String id) {
-        return productRepository.findById(id).orElse(null);
+    public Optional<Product> findById(String id) {
+        return productRepository.findById(id);
     }
+
 
     @Override
     public void save(Product product) {

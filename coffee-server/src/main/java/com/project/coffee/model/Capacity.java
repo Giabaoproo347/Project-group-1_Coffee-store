@@ -22,16 +22,19 @@ public class Capacity {
     private String capacityName;
     private Long capacityValue;
 
-    public Set<ProductDetails> getProductDetails() {
-        return productDetails;
+    @OneToMany (targetEntity = ProductDetails.class, fetch = FetchType.EAGER)
+    private Set<ProductDetails> productDetails;
+
+    public Capacity() {
     }
 
-    public void setProductDetails(Set<ProductDetails> productDetails) {
+    public Capacity(String capacityId, String capacityName, Long capacityValue, Set<ProductDetails> productDetails) {
+        this.capacityId = capacityId;
+        this.capacityName = capacityName;
+        this.capacityValue = capacityValue;
         this.productDetails = productDetails;
     }
 
-    @OneToMany (targetEntity = ProductDetails.class)
-    private Set<ProductDetails> productDetails;
 
     public String getCapacityId() {
         return capacityId;
@@ -53,6 +56,13 @@ public class Capacity {
         return capacityValue;
     }
 
+    public Set<ProductDetails> getProductDetails() {
+        return productDetails;
+    }
+
+    public void setProductDetails(Set<ProductDetails> productDetails) {
+        this.productDetails = productDetails;
+    }
     public void setCapacityValue(Long capacityValue) {
         this.capacityValue = capacityValue;
     }

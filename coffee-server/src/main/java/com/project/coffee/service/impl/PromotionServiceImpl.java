@@ -5,6 +5,8 @@ import com.project.coffee.repository.PromotionRepository;
 import com.project.coffee.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class PromotionServiceImpl implements PromotionService {
     @Autowired
     private PromotionRepository promotionRepository;
@@ -14,9 +16,10 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public Promotion findById(String id) {
-        return promotionRepository.findById(id).orElse(null);
+    public Optional<Promotion> findById(String id) {
+        return promotionRepository.findById(id);
     }
+
 
     @Override
     public void save(Promotion promotion) {

@@ -10,66 +10,75 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin( origins = "*", maxAge = 3600)
+@RequestMapping("/api/order-detail")
 public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @GetMapping("/orderDetails")
-    public ResponseEntity<List<OrderDetails>> listAllOrderDetails() {
-        List<OrderDetails> orderDetails =(List<OrderDetails>) orderDetailService.findAll();
-        if (orderDetails.isEmpty()) {
-            return new ResponseEntity<List<OrderDetails>>(HttpStatus.NO_CONTENT);
+    @GetMapping("")
+    public ResponseEntity<Iterable<OrderDetails>> showListOrderDetails() {
+        Iterable<OrderDetails> orderDetails = orderDetailService.findAll();
+        return new ResponseEntity<Iterable<OrderDetails>>(orderDetails, HttpStatus.OK);
+    }
+
+    @PostMapping("")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity addNewOrderDetail(@Valid @RequestBody OrderDetails orderDetails) {
+        try {
+            orderDetailService.save(orderDetails);
+            return new ResponseEntity(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<List<OrderDetails>>(orderDetails, HttpStatus.OK);
     }
 
-
-    @GetMapping("/orderDetails/{id}")
-    public ResponseEntity<OrderDetails> getOrderDetails(@PathVariable String id) {
-        OrderDetails orderDetails = orderDetailService.findById(id);
-        if (orderDetails == null) {
-            return new ResponseEntity<OrderDetails>(HttpStatus.NOT_FOUND);
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDetails> getOrderDetailById(@PathVariable String id) {
+        Optional<OrderDetails> orderDetails = orderDetailService.findById(id);
+        if (orderDetails.isPresent()) {
+            System.out.println("find Order");
+            return new ResponseEntity<OrderDetails>(orderDetails.get(), HttpStatus.OK);
         }
-        return new ResponseEntity<OrderDetails>(orderDetails, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/orderDetails")
-    public ResponseEntity<Void> createOrderDetails(@RequestBody OrderDetails orderDetails, UriComponentsBuilder ucBuider) {
-        orderDetailService.save(orderDetails);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuider.path("/orderDetails{id}").buildAndExpand(orderDetails.getOrderDetailId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-    }
+    @PutMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<OrderDetails> updateOrderDetail(@PathVariable String id, @RequestBody OrderDetails orderDetails) {
+        Optional<OrderDetails> currentOrderDetail = orderDetailService.findById(id);
+        if (currentOrderDetail.isPresent()) {
+            currentOrderDetail.get().setOrderDetailId(id);
+            currentOrderDetail.get().setSalePrice(orderDetails.getSalePrice());
+            currentOrderDetail.get().setQuantity(orderDetails.getQuantity());
+            currentOrderDetail.get().setTotalPay(orderDetails.getTotalPay());
+            currentOrderDetail.get().setOrder(orderDetails.getOrder());
+            currentOrderDetail.get().setProductDetails(orderDetails.getProductDetails());
 
-    @PutMapping("/orderDetails/{id}")
-    public ResponseEntity<OrderDetails> updateOrderDetails(@PathVariable String id, @RequestBody OrderDetails orderDetails) {
-        OrderDetails currentOrderDetails = orderDetailService.findById(id);
-
-        if (currentOrderDetails == null) {
-            return new ResponseEntity<OrderDetails>(HttpStatus.NOT_FOUND);
+            orderDetailService.save(currentOrderDetail.get());
+            return new ResponseEntity<OrderDetails>(currentOrderDetail.get(), HttpStatus.OK);
         }
+        return new ResponseEntity<OrderDetails>(HttpStatus.NOT_FOUND);
 
-        currentOrderDetails.setSalePrice(orderDetails.getSalePrice());
-        currentOrderDetails.setQuantity(orderDetails.getQuantity());
-        currentOrderDetails.setTotalPay(orderDetails.getTotalPay());
-
-        orderDetailService.save(currentOrderDetails);
-        return new ResponseEntity<OrderDetails>(currentOrderDetails, HttpStatus.OK);
     }
 
-    @DeleteMapping("/orderDetails/{id}")
-    public ResponseEntity<OrderDetails> deleteOrders(@PathVariable("id") String id) {
-
-        OrderDetails orderDetails = orderDetailService.findById(id);
-        if (orderDetails == null) {
-            return new ResponseEntity<OrderDetails>(HttpStatus.NOT_FOUND);
+    @DeleteMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<OrderDetails> deleteOrderDetail(@PathVariable String id) {
+        Optional<OrderDetails> orderDetails = orderDetailService.findById(id);
+        if (orderDetails.isPresent()) {
+            orderDetailService.remove(id);
+            return new ResponseEntity<OrderDetails>(HttpStatus.OK);
         }
-
-        orderDetailService.remove(id);
-        return new ResponseEntity<OrderDetails>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<OrderDetails>(HttpStatus.NOT_FOUND);
     }
+
+
+
+
 }

@@ -6,6 +6,8 @@ import com.project.coffee.repository.ProductDetailsRepository;
 import com.project.coffee.service.ProductDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class ProductDetailsServiceImpl implements ProductDetailsService {
     @Autowired
     private ProductDetailsRepository productDetailsRepository;
@@ -16,8 +18,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
     @Override
-    public ProductDetails findById(String id) {
-        return productDetailsRepository.findById(id).orElse(null);
+    public Optional<ProductDetails> findById(String id) {
+        return productDetailsRepository.findById(id);
     }
 
     @Override
